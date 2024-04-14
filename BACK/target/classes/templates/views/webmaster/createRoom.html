@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="form-group">
+    <title>Crear Habitaciones</title>
+    <h2>En esta página puedes crear las habitaciones del Hotel.</h2>
+
+    <form method="post" th:action="@{/descuento/createDescuento}" >
+        <label for="num">Numero de Habitacion</label>
+        <input class="form-control" id="num" name="num" type="number" min="1"/>
+
+        <label for="desc">Descripcion</label>
+        <textarea id="desc" name="desc" rows="4" cols="50"></textarea>
+
+        <label for="disp">Disponibilidad</label>
+        <input class="form-control" id="disp" name="disp" type="text" >
+
+        <label for="extra">Extras</label>
+        <input class="form-control" id="extra" name="extra" type="text" >
+
+        <label for="img">Adjuntar Imagen</label>
+        <input class="form-control" id="img" name="img" type="file" accept="image/*" >
+
+    </form>
+    <button type="submit" class="btn btn-primary">Crear Oferta</button>
+</div>
+
+
+<script type="text/javascript">
+    let datePickerId;
+    datePickerId.max = new Date().toISOString().split("T")[0];
+</script>
+</body>
+</html>

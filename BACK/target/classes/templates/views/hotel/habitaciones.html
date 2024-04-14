@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/template :: head">
+</head>
+<body>
+	<header th:replace="plantillas/template :: header"></header>
+	
+	<div class="container">
+		<div class="text-center pt-4">
+            <h2><strong>Habitaciones y precios</strong></h2>
+            <p>Nuestras habitaciones te transportarán a un entorno de comodidad
+            sin igual donde podrás disfrutar y olvidar todas tus preocupaciones.<br>
+            Reserva hoy la habitación que mejor se habitue a tus preferencias: entre
+            las habitaciones de una habitación - con o sin servicios añadidos - <br>
+            hasta suites de alta clase con todo incluido.</p>
+        </div>
+	</div>
+
+	<!--
+	1. Obtener todas las Habitaciones
+
+	-->
+
+	<div style="padding-bottom: 40px;">
+			<table style="margin: 0 auto;">
+				<tr th:each="habitacion: ${habitaciones}">
+					<td style="padding-right: 200px;">
+						<table>
+							<tr>
+								<td><h3 th:text="${habitacion.gama}"></h3></td>
+							</tr>
+							<tr>
+								<td><p>Número: </p></td>
+								<td><p th:text="${habitacion.num}"></p></td>
+							</tr>
+							<tr>
+								<td><p>Camas: </p></td>
+								<td><p th:text="${habitacion.numcamas}"></p></td>
+							</tr>
+							<tr>
+								<td><p>Mascotas: </p></td>
+								<td><p th:text="${habitacion.mascotas ? 'Sí' : 'No'}"></p></td>
+							</tr>
+							<tr>
+								<td><p>Precio: </p></td>
+								<td><p th:text="${habitacion.precio}"></p></td>
+							</tr>
+						</table>
+
+						<a th:href="@{'/servicio/allCheckout?gama=' + ${habitacion.gama} + '&num=' + ${habitacion.num} + '&numcamas=' + ${habitacion.numcamas} + '&mascotas=' + ${habitacion.mascotas} + '&precio=' + ${habitacion.precio}}">
+							<button type="button" class="btn btn-primary mt-1 mb-4">Alquilar</button>
+						</a>
+					</td>
+
+					<td><img src="https://i.ibb.co/FKXyp0p/hotel1.jpg" alt="hotel1" border="0"></td>
+				</tr>
+			</table>
+		</div>
+
+		<!--
+		<div style="padding-bottom: 40px;">
+			<table style="margin: 0 auto;">
+				<tr>
+					<td style="padding-right: 200px;">
+						<h3>1 Habitación</h3>
+						<p>
+							Número de Habitación. Descripción<br>
+							Disponibilidad. Extras.<br>
+							Disponibles de la Habitación.
+						</p>
+						<button type="submit" class="btn btn-primary mt-1">147$ / noche </button>
+					</td>
+
+					<td><img src="https://i.ibb.co/FKXyp0p/hotel1.jpg" alt="hotel1" border="0"></td>
+				</tr>
+			</table>
+		</div> -->
+	
+	<footer th:replace="plantillas/template :: footer"></footer>
+
+</body>
+</html>

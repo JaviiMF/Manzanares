@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/template :: head"></head>
+
+<body
+	style="display: flex; flex-direction: column; min-height: 100vh; margin: 0;">
+
+	<header th:replace="plantillas/template :: header">
+		<h1 class="text-center">Contáctanos</h1>
+	</header>
+
+	<div class="container" style="flex: 1;">
+
+		<div class="text-center pt-4">
+			<h1>
+				<strong>Checkout</strong>
+			</h1>
+			<p>
+				Aquí tiene la información sobre su transacción.<br>
+				Por favor compruebe que los datos sean correctos e introduzca sus datos personales.
+			</p>
+		</div>
+
+		<div style="text-align: left;">
+			<table style="margin: auto;">
+				<tr>
+					<td><h2 th:text="${param.gama}"></h2></td>
+				</tr>
+				<tr>
+					<td><p>Número: </p></td>
+					<td><p th:text="${param.num}"></p></td>
+				</tr>
+				<tr>
+					<td><p>Camas: </p></td>
+					<td><p th:text="${param.numcamas}"></p></td>
+				</tr>
+				<tr>
+					<td><p>Mascotas: </p></td>
+					<td><p th:text="${param.mascotas ? 'Sí' : 'No'}"></p></td>
+				</tr>
+				<tr>
+					<td><p>Precio: </p></td>
+					<td><p th:text="${param.precio}"></p></td>
+				</tr>
+			</table>
+		</div>
+
+		<div style="text-align: left;">
+			<table style="margin: auto;" th:if="${param.servicioDesc != null}">
+				<tr>
+					<td><h3 th:text="${param.servicioDesc}"></h3></td>
+				</tr>
+				<tr>
+					<td><p>Horario: </p></td>
+					<td><p th:text="${param.servicioHorario}"></p></td>
+				</tr>
+				<tr>
+					<td><p>Precio: </p></td>
+					<td><p th:text="${param.servicioPrecio}"></p></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="text-center pt-4">
+			<h2>Precio Total: <span th:text="${param.precio}"></span></h2>
+		</div>
+
+		<form class="form-horizontal mt-4" action="#" th:action="@{createUsuario}" th:object="${usuario}" method="post" onsubmit="return validarRegistro()">
+			<!-- Registrarse Form -->
+			<div class="form-group text-center">
+				<h2>Registrarse</h2>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="regNombre">Nombre</label> <input type="text"
+																	 class="form-control" id="regNombre" placeholder="Nombre" th:field="*{nombre}" required>
+					</div>
+					<div class="col-md-6">
+						<label for="regNIF">NIF</label> <input type="text"
+															   class="form-control" id="regNIF" placeholder="NIF" th:field="*{dni}" required>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="fechaEntrada">Fecha Entrada</label> <input
+							type="date" class="form-control" id="fechaEntrada" required>
+					</div>
+					<div class="col-md-6">
+						<label for="fechaFin">Fecha Salida</label> <input
+							type="date" class="form-control" id="fechaFin" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="regPassword">Contraseña</label> <input type="password"
+																		   class="form-control" id="regPassword" placeholder="Contraseña" th:field="*{contrasena}"
+																		   required>
+					</div>
+					<div class="col-md-6">
+						<label for="regConfirmPassword">Confirmar Contraseña</label> <input
+							type="password" class="form-control" id="regConfirmPassword" th:field="*{contrasena}"
+							placeholder="Confirmar Contraseña" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="regEmail">Email</label> <input type="email"
+																   class="form-control" id="regEmail" placeholder="Email" th:field="*{email}" required>
+					</div>
+					<div class="col-md-6">
+						<label for="regTlf">Teléfono</label> <input type="tel"
+																	class="form-control" id="regTlf" placeholder="Teléfono" th:field="*{telefono}" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="regPais">País</label> <select class="form-control"
+																  id="regPais"  required>
+						<option>España</option>
+						<option>Italia</option>
+						<option>Francia</option>
+						<option>Portugal</option>
+					</select>
+					</div>
+					<div class="col-md-6">
+						<label for="regGenero">Género</label> <select class="form-control"
+																	  id="regGenero" required>
+						<option>Male</option>
+						<option>Female</option>
+						<option>Other</option>
+					</select>
+					</div>
+				</div>
+				<div class="form-check mt-2">
+					<input type="checkbox" class="form-check-input"
+						   id="terminosCondiciones" required> <label
+						class="form-check-label" for="terminosCondiciones">Acepto
+					términos y condiciones</label>
+				</div>
+				<div class="form-check">
+					<input type="checkbox" class="form-check-input"
+						   id="recibirNotificaciones"> <label
+						class="form-check-label" for="recibirNotificaciones">Deseo
+					recibir notificaciones</label>
+				</div>
+				<button type="submit" class="btn btn-primary mt-3 mb-3">Darse
+					de alta</button>
+			</div>
+		</form>
+
+		<script>
+			function validarRegistro() {
+				// Puedes personalizar la función de validación según tus necesidades.
+				var nombre = document.getElementById("regNombre").value;
+				var apellidos = document.getElementById("regApellidos").value;
+				var nif = document.getElementById("regNIF").value;
+				var nacimiento = document.getElementById("regNacimiento").value;
+				var password = document.getElementById("regPassword").value;
+				var confirmPassword = document.getElementById("regConfirmPassword").value;
+				var email = document.getElementById("regEmail").value;
+				var telefono = document.getElementById("regTlf").value;
+				var pais = document.getElementById("regPais").value;
+				var genero = document.getElementById("regGenero").value;
+				var terminosCondiciones = document.getElementById("terminosCondiciones").checked;
+
+				if (nombre === "" || apellidos === "" || nif === "" || nacimiento === "" || password === "" || confirmPassword === "" || email === "" || telefono === "" || pais === "" || genero === "" || !terminosCondiciones) {
+					alert("Por favor, complete todos los campos obligatorios.");
+					return false;
+				}
+
+				// Puedes agregar más validaciones según tus necesidades.
+
+				return true; // Envía el formulario si todas las validaciones son exitosas.
+			}
+		</script>
+
+
+
+	</div>
+
+	<footer th:replace="plantillas/template :: footer"></footer>
+</body>
+
+</html>
+

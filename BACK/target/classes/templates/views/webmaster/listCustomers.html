@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/template :: head">
+</head>
+<body>
+
+<meta charset="UTF-8">
+    <header th:replace="~{plantillas/template :: header}"></header>
+    <div class="container pt-4">
+        <h1>Listado de Usuarios</h1>
+        <h2>En esta página puedes acceder a todos los datos sobre los usuarios y sus roles.</h2>
+    </div>
+
+    <div class="container pt-4">
+        <div class="row mt-3">
+            <div class="row mt-3">
+                <div class="col">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Email</th>
+                            <th>Nif</th>
+                            <th>Teléfono</th>
+                            <th>Rol</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tabla-body">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Realizar la solicitud GET a la API de backend
+        fetch('http://localhost:8081/customer/all')
+            .then(response => response.json())
+            .then(data => {
+                // Manipular los datos recibidos y construir la tabla
+                const tablaBody = document.getElementById('tabla-body');
+
+                data.forEach(usuario => {
+                    const fila = document.createElement('tr');
+
+                    const nombre = document.createElement('td');
+                    nombre.textContent = usuario.nombre;
+                    fila.appendChild(nombre);
+
+                    const apellidos = document.createElement('td');
+                    apellidos.textContent = usuario.apellidos;
+                    fila.appendChild(apellidos);
+
+                    const email = document.createElement('td');
+                    email.textContent = usuario.email;
+                    fila.appendChild(email);
+
+                    const nif = document.createElement('td');
+                    nif.textContent = usuario.nif;
+                    fila.appendChild(nif);
+
+                    const telefono = document.createElement('td');
+                    telefono.textContent = usuario.telefono;
+                    fila.appendChild(telefono);
+
+                    tablaBody.appendChild(fila);
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos:', error);
+            });
+    </script>
+
+    <footer th:replace="~{plantillas/template :: footer}"></footer>
+</body>
+</html>
