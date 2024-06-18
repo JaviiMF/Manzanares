@@ -24,17 +24,17 @@ function Home() {
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">Hotel XYZ</a>
+            <a className="navbar-brand" href="/">Hotel XYZ</a>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Inicio</a>
+                        <a className="nav-link" href="/">Inicio</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Acerca de</a>
+                        <a className="nav-link" href="/about">Acerca de</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Contacto</a>
+                        <a className="nav-link" href="/contact">Contacto</a>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
@@ -43,10 +43,10 @@ function Navbar() {
                 </form>
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Iniciar sesión</a>
+                        <a className="nav-link" href="/login">Iniciar sesión</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Registrarse</a>
+                        <a className="nav-link" href="/register">Registrarse</a>
                     </li>
                 </ul>
             </div>
@@ -87,7 +87,7 @@ function RegisterForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/add', formData); // Cambio de URL aquí
+            const response = await axios.post('http://localhost:8080/customer/createUsuario', formData); // Cambio de URL aquí
             console.log('Registro exitoso:', response.data);
             // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
         } catch (error) {

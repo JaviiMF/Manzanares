@@ -26,10 +26,10 @@ public class Usuario {
     private String telefono;
     private String dni;
     private String direccion;
-    @ColumnDefault("cliente")
+    @Column(name = "tipo", columnDefinition = "varchar(255) default 'cliente'")
     private String tipo;
     private String horario;
-    @ColumnDefault("true")
+    @Column(name = "activo", columnDefinition = "boolean default true")
     private Boolean activo;
 
     @Override
