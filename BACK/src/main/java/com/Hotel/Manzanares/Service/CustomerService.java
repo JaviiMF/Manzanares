@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface CustomerService {
 
     Optional<Usuario> getUsuario(Long id);
+
+    Optional<Usuario>getUsuarioDni(String dni);
     void createUsuario(Usuario usuario);
 
     void deleteUsuario(String dni);

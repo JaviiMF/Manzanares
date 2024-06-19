@@ -14,6 +14,6 @@ public interface ReserveRepository extends JpaRepository<Reserva,Long> {
     @Query(value = "select b.id from reserva a right join habitacion b on a.id_habitacion = b.id where a.id_habitacion is null", nativeQuery = true)
     List<Long> getHabitacionesSinReserva();
 
-    @Query(value = "select b.id from reserva a inner join habitacion b on a.id_habitacion = b.id where (a.fecha_Checkin >:fechaInicio and  a.fecha_Checkin >:fechaFin) or (a.fecha_Checkout <:fechaInicio and a.fecha_Checkout <:fechaFin)", nativeQuery = true)
+    @Query(value = "select b.id from reserva a inner join habitacion b on a.id_habitacion = b.id where not (a.fecha_Checkin <= CAST(:fechaFin AS TIMESTAMP) and a.fecha_Checkout >= CAST(:fechaInicio AS TIMESTAMP))", nativeQuery = true)
     Collection<Long> getHabitacionesSiNoReservadas(@Param("fechaInicio") String fechaInicio, @Param("fechaFin") String fechaFin);
 }

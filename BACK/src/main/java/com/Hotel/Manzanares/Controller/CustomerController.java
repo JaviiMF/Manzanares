@@ -24,6 +24,9 @@ public class CustomerController {
         return customerService.getUsuario(id);
     }
 
+    @GetMapping("/getUsuarioDni/{dni}")
+    public Optional<Usuario>getUsuarioDni(@PathVariable String dni){return customerService.getUsuarioDni(dni);}
+
     @PostMapping("/createUsuario")
     public void createUsuario(@RequestBody Usuario usuario){
         customerService.createUsuario(usuario);
