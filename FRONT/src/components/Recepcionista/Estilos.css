@@ -1,0 +1,101 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-title {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px; /* Espacio entre el título y el formulario */
+}
+
+.form-description {
+    text-align: center; /* Alineación centrada para el subtítulo */
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Ajustar a dos columnas */
+    gap: 20px; /* Espacio entre las columnas */
+    margin-top: 20px;
+}
+
+.izq, .der {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espacio entre los form-groups dentro de cada columna */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submit-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px; /* Margen superior para el contenedor del botón */
+}
+
+.submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    margin-top: 20px; /* Margen superior para el botón */
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.label-center {
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+label {
+    margin-bottom: 5px;
+    align-self: flex-start;
+}
+
+input {
+    padding: 8px;
+    width: 200px; /* Ajustar el ancho de los inputs */
+}
+
+
+.cliente-table {
+    width: 80%; /* Ajusta este valor según tus necesidades */
+    margin: 20px auto; /* 20px de margen arriba y abajo, centrado horizontalmente */
+    border-collapse: collapse;
+}
+
+.cliente-table th, .cliente-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.cliente-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.cliente-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cliente-table tr:hover {
+    background-color: #ddd;
+}
