@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 function Home() {
@@ -23,35 +24,42 @@ function Home() {
 
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">Hotel XYZ</a>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Acerca de</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Contacto</a>
-                    </li>
-                </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Iniciar sesión</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Registrarse</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    );
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <Link className="navbar-brand" to="/">Hotel XYZ</Link> {/* Reemplaza <a> con <Link> */}
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/">Inicio</Link> {/* Reemplaza href="#" con <Link> */}
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/about">Acerca de</Link> {/* Añade un enlace a la vista Acerca de */}
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/contact">Contacto</Link> {/* Añade un enlace a la vista de Contacto */}
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/reservations">Reservas</Link> {/* Añade un enlace a la vista de Reservas */}
+                        </li>
+                    </ul>
+                    <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/login">Iniciar sesión</Link> {/* Reemplaza href="#" con <Link> */}
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/register">Registrarse</Link> {/* Reemplaza href="#" con <Link> */}
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        );
 }
 
 function LoginForm() {
