@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,9 @@ public class ExtrasServiceImpl implements ExtrasService {
     public Optional<Extras> getExtras(Long id) {
         return extrasRepository.findExtrasById(id);
     }
+
+    @Override
+    public List<Extras> getAllExtras(){return extrasRepository.findAll();}
 
     @Override
     public void createExtras(Extras extras) {

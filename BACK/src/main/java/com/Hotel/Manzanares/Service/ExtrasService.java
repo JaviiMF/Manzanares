@@ -3,6 +3,7 @@ package com.Hotel.Manzanares.Service;
 import com.Hotel.Manzanares.Entity.Extras;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,4 +16,6 @@ public interface ExtrasService {
     void deleteExtras(Long id);
 
     void updateExtras(Long id, Extras extra);
+
+    List<Extras> getAllExtras();
 }

@@ -1,0 +1,26 @@
+/* Navbar.css */
+.navbar {
+    background-color: #343a40; /* Cambia el color de fondo */
+    padding: 1rem; /* Añade padding para mejorar el espaciado */
+}
+
+.navbar-brand {
+    color: #fff; /* Cambia el color del texto de la marca */
+    font-size: 1.5rem; /* Aumenta el tamaño de la fuente */
+}
+
+.navbar-brand:hover {
+    color: #ccc; /* Cambia el color al pasar el mouse */
+}
+
+.nav-link {
+    color: #ddd; /* Cambia el color de los enlaces */
+}
+
+.nav-link:hover {
+    color: #fff; /* Cambia el color al pasar el mouse */
+}
+
+.nav-item {
+    margin-left: 1rem; /* Añade un margen entre los elementos del menú */
+}
