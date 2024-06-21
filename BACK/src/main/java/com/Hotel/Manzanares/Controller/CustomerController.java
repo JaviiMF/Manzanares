@@ -24,6 +24,11 @@ public class CustomerController {
         return customerService.getUsuario(id);
     }
 
+    @GetMapping("/find/{dni}")
+    public Usuario getUsuarioDNI(@PathVariable String dni){
+        return customerService.getUsuarioDNI(dni);
+    }
+
     @PostMapping("/createUsuario")
     public void createUsuario(@RequestBody Usuario usuario){
         customerService.createUsuario(usuario);
