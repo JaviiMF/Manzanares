@@ -1,28 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './CrearReserva.css'; // Asegúrate de importar tu archivo CSS
 import axios from 'axios';
 
 function CrearReserva() {
   const [dni, setDni] = useState('');
   const [fechaEntrada, setFechaEntrada] = useState('');
   const [fechaSalida, setFechaSalida] = useState('');
-  const [descuentos, setDescuentos] = useState([]); // Agregamos el estado descuentos
+  const [descuento, setDescuento] = useState('');
   const [habitacion, setHabitacion] = useState('');
   const [habitacionesDisponibles, setHabitacionesDisponibles] = useState([]);
+  const [descuentos, setDescuentos] = useState([]);
+  const [extras, setExtras] = useState([]);
+  const [extrasSeleccionados, setExtrasSeleccionados] = useState([]);
+  const [servicios, setServicios] = useState([]);
+  const [serviciosSeleccionados, setServiciosSeleccionados] = useState([]);
   const [error, setError] = useState('');
-  const [descuento, setDescuento] = useState('');
-
-  /*const descuentos = [
-    { value: '0', label: '0%' },
-    { value: '10', label: '10%' },
-    { value: '20', label: '20%' },
-  ];*/
+  const [mensaje, setMensaje] = useState('');
 
   useEffect(() => {
     if (fechaEntrada && fechaSalida) {
       fetchHabitacionesDisponibles(fechaEntrada, fechaSalida);
     }
+    fetchDescuentos();
+    fetchExtras();
+    fetchServicios();
   }, [fechaEntrada, fechaSalida]);
+
+  const fetchDescuentos = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/descuento/allDescuentos');
+      setDescuentos(response.data);
+    } catch (error) {
+      console.error('Error fetching discounts', error);
+    }
+  };
+
+  const fetchExtras = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/extras/allExtras');
+      setExtras(response.data);
+    } catch (error) {
+      console.error('Error fetching extras', error);
+    }
+  };
+
+  const fetchServicios = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/servicio/allServicios');
+      setServicios(response.data);
+    } catch (error) {
+      console.error('Error fetching servicios', error);
+    }
+  };
 
   const fetchHabitacionesDisponibles = async (fechaEntrada, fechaSalida) => {
     try {
@@ -36,35 +66,36 @@ function CrearReserva() {
     }
   };
 
-  const fetchDescuentos = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/descuento/allDescuentos');
-      setDescuentos(response.data);
-    } catch (error) {
-      console.error('Error fetching discounts', error);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (new Date(fechaSalida) < new Date(fechaEntrada)) {
       setError('La fecha de salida no puede ser menor que la fecha de entrada.');
       return;
     }
     setError('');
-    console.log({
-      dni,
-      fechaEntrada,
-      fechaSalida,
-      descuento,
-      habitacion,
-    });
-    // Aquí puedes añadir el código para manejar el envío del formulario
-  };
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    return new Date(dateString).toLocaleDateString('en-CA', options).replace(/-/g, '/');
+    try {
+      const response = await axios.post('http://localhost:8080/reserve/createReserve', {
+        dniCliente: dni,
+        fechaInicio: fechaEntrada,
+        fechaFin: fechaSalida,
+        idDescuento: parseInt(descuento),
+        idHabitacion: parseInt(habitacion),
+        listaExtras: extrasSeleccionados.map(extra => extra.id),
+        listaServicios: serviciosSeleccionados.map(servicio => servicio.id)
+      });
+      setMensaje('Reserva creada exitosamente');
+      setDni('');
+      setFechaEntrada('');
+      setFechaSalida('');
+      setDescuento('');
+      setHabitacion('');
+      setExtrasSeleccionados([]);
+      setServiciosSeleccionados([]);
+    } catch (error) {
+      console.error('Error creating reservation', error);
+      setError('Error al crear la reserva. Por favor, intenta nuevamente.');
+    }
   };
 
   const handleFechaEntradaChange = (e) => {
@@ -75,6 +106,30 @@ function CrearReserva() {
   const handleFechaSalidaChange = (e) => {
     const formattedDate = formatDate(e.target.value);
     setFechaSalida(formattedDate);
+  };
+
+  const handleExtraChange = (extra) => {
+    setExtrasSeleccionados((prevExtras) => {
+      if (prevExtras.includes(extra)) {
+        return prevExtras.filter((e) => e !== extra);
+      } else {
+        return [...prevExtras, extra];
+      }
+    });
+  };
+
+  const handleServicioChange = (servicio) => {
+    setServiciosSeleccionados((prevServicio) => {
+      if (prevServicio.includes(servicio)) {
+        return prevServicio.filter((e) => e !== servicio);
+      } else {
+        return [...prevServicio, servicio];
+      }
+    });
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toISOString().split('T')[0]; // Formatea a yyyy-MM-dd
   };
 
   return (
@@ -103,7 +158,7 @@ function CrearReserva() {
                 onChange={handleFechaEntradaChange}
                 required
               />
-              <small className="form-text text-muted">Formato esperado: yyyy/mm/dd</small>
+              <small className="form-text text-muted">Formato esperado: yyyy-MM-dd</small>
             </div>
           </div>
           <div className="col-md-6">
@@ -115,12 +170,12 @@ function CrearReserva() {
                 onChange={handleFechaSalidaChange}
                 required
               />
-              <small className="form-text text-muted">Formato esperado: yyyy/mm/dd</small>
+              <small className="form-text text-muted">Formato esperado: yyyy-MM-dd</small>
             </div>
           </div>
           <div className="col-md-6">
             <div className="form-group">
-            <label>Descuento:</label>
+              <label>Descuento:</label>
               <select
                 className="form-control"
                 value={descuento}
@@ -154,12 +209,55 @@ function CrearReserva() {
               </select>
             </div>
           </div>
+          <div className="col-md-6">
+            <div className="form-group">
+              <label>Extras:</label>
+              <div>
+                {extras.map((extra) => (
+                  <div key={extra.id} className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`extra-${extra.id}`}
+                      checked={extrasSeleccionados.includes(extra)}
+                      onChange={() => handleExtraChange(extra)}
+                    />
+                    <label className="form-check-label" htmlFor={`extra-${extra.id}`}>
+                      {extra.descripcion} {extra.precio}€
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group">
+              <label>Servicios:</label>
+              <div>
+                {servicios.map((servicio) => (
+                  <div key={servicio.id} className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`servicio-${servicio.id}`}
+                      checked={serviciosSeleccionados.includes(servicio)}
+                      onChange={() => handleServicioChange(servicio)}
+                    />
+                    <label className="form-check-label" htmlFor={`servicio-${servicio.id}`}>
+                      {servicio.descripcion} {servicio.precio}€
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
         {error && <div className="alert alert-danger">{error}</div>}
         <button type="submit" className="btn btn-primary">
           Crear Reserva
         </button>
       </form>
+      {mensaje && <div className="alert alert-success">{mensaje}</div>}
     </div>
   );
 }

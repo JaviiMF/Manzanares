@@ -4,7 +4,6 @@ import Home from './components/Home';
 import RoomAviable from './components/RoomAviable';
 import CrearReserva from './components/Recepcionista/CrearReserva';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Switch } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
