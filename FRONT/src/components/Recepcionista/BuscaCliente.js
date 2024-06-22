@@ -8,9 +8,9 @@ export function BuscaCliente() {
     const handleSubmit = (event) => {
         event.preventDefault();  
         
-        axios.get(`http://localhost:8081/customer/find/${dni}`)
+        axios.get(`http://localhost:8080/customer/find/${dni}`)
             .then(response => {
-                setMensaje(`Usuario encontrado: ${response.data.nombre} ${response.data.apellidos}`);
+                setMensaje(`Usuario encontrado: ${response.data.nombre} `); // ${response.data.apellidos}
             })
             .catch(error => {
                 if (error.response ) {
@@ -19,7 +19,7 @@ export function BuscaCliente() {
                     console.log(error.response.status);
                     console.log(error.response.headers);
                 } else if (error.request) {
-                    console.log(error.request);
+                    console.log(error.request + "A");
                 }
                  else {
                     setMensaje("Error: " + (error.message || "No se pudo conectar con el servidor"));

@@ -4,7 +4,7 @@ import axios from 'axios';
 export function AltaCliente() {
     const [nombre, setNombre] = useState('');
     const [dni, setDni] = useState('');
-    const [password, setPassword] = useState('');
+    const [contrasena, setContrasena] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [pais, setPais] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -13,10 +13,11 @@ export function AltaCliente() {
     const [telefono, setTelefono] = useState('');
     const [genero, setGenero] = useState('masculino');
     const [error, setError] = useState('');
+    const [direccion, setDireccion] = useState('');
 
     // Función para validar si las contraseñas coinciden
     const validatePasswords = () => {
-        return password === confPassword;
+        return contrasena === confPassword;
     };
 
     const handleSubmit = (event) => {
@@ -30,22 +31,23 @@ export function AltaCliente() {
         const data = {
             nombre,
             dni,
-            password,
+            contrasena,
             fechaNacimiento,
             pais,
             apellidos,
             email,
             telefono,
-            genero
+            genero,
+            direccion
         };
 
-        axios.post('http://localhost:8081/customer/createUsuario', data)
+        axios.post('http://localhost:8080/customer/createUsuario', data)
             .then(response => {
                 alert('Usuario creado exitosamente');
                 // Limpiar formulario después de la creación exitosa
                 setNombre('');
                 setDni('');
-                setPassword('');
+                setContrasena('');
                 setFechaNacimiento('');
                 setPais('');
                 setApellidos('');
@@ -53,6 +55,7 @@ export function AltaCliente() {
                 setConfPassword('');
                 setTelefono('');
                 setGenero('masculino');
+                setDireccion('');
                 setError('');
             })
             .catch(error => {
@@ -97,8 +100,8 @@ export function AltaCliente() {
                                 type="password" 
                                 name="pass" 
                                 id="pass" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
+                                value={contrasena} 
+                                onChange={(e) => setContrasena(e.target.value)} 
                             />
                         </div>
                         <div className="form-group">
@@ -120,6 +123,20 @@ export function AltaCliente() {
                                 value={pais} 
                                 onChange={(e) => setPais(e.target.value)} 
                             />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="genero">Genero </label>    
+                            <select 
+                                name="genero" 
+                                id="genero" 
+                                value={genero} 
+                                onChange={(e) => setGenero(e.target.value)} 
+                            >
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="otro">Otro</option>
+                                <option value="no_decir">Prefiero no decirlo</option>
+                            </select>
                         </div>
                     </div>
                     <div className="der">
@@ -164,19 +181,16 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="genero">Genero </label>    
-                            <select 
-                                name="genero" 
-                                id="genero" 
-                                value={genero} 
-                                onChange={(e) => setGenero(e.target.value)} 
-                            >
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
-                                <option value="no_decir">Prefiero no decirlo</option>
-                            </select>
+                            <label htmlFor="direccion">Direccion </label>    
+                            <input 
+                                type="text" 
+                                name="direccion" 
+                                id="direccion" 
+                                value={direccion} 
+                                onChange={(e) => setDireccion(e.target.value)} 
+                            />
                         </div>
+                        
                     </div>               
                 </div>
 
