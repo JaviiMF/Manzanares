@@ -18,7 +18,7 @@ public class Habitacion {
     private Double m2;
     private Integer num;
     private Integer numcamas;
-    private String gama;
+    private Long gama;
     private Boolean mascotas;
     private Double precio;
     private Boolean activa;
