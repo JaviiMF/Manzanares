@@ -1,0 +1,11 @@
+.brand-text-large {
+    font-size: 32px; /* Ajusta el tamaño de fuente para "Manzanares" */
+    font-weight: bold; /* Opcional: ajusta el peso de la fuente */
+}
+
+.brand-text-small {
+    font-size: 10px; /* Ajusta el tamaño de fuente para ".com" */
+    font-weight: bold; /* Opcional: ajusta el peso de la fuente */
+    opacity: 0.7; /* Opcional: ajusta la opacidad para hacerlo más sutil */
+    margin-left: 4px; /* Opcional: ajusta el espacio entre "Manzanares" y ".com" */
+}

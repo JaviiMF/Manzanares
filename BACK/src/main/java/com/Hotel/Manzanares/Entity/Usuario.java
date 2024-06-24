@@ -26,10 +26,10 @@ public class Usuario {
     private String telefono;
     private String dni;
     private String direccion;
-    @ColumnDefault("cliente")
+    //@ColumnDefault("cliente")
     private String tipo;
     private String horario;
-    @ColumnDefault("true")
+    //@ColumnDefault("true")
     private Boolean activo;
 
     @Override
