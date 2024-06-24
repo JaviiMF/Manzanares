@@ -1,27 +1,24 @@
 import React from 'react';
-import './Navbar.css'; // Importar el archivo CSS personalizado
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../assets/logo.jpeg'; // Asegúrate de tener el logo en la carpeta assets
+import './Navbar.css'; // Importa tus estilos CSS personalizados
 
-function Navbar() {
+const Navbar = () => {
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg">
-                <a className="navbar-brand" href="#">Manzanares Hotel</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <a className="nav-link" href="/register">Register</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/login">Login</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        <nav className="navbar navbar-light bg-white fixed-top border-bottom">
+            <div className="container">
+                <a className="navbar-brand text-dark" href="/">
+                    <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+                </a>
+                <a className="navbar-brand mx-auto text-dark" href="/">
+                    <img src={logo} alt="Logo" height="60" className="mr-2" />
+                    <span className="brand-text-large">Manzanares</span>
+                    <span className="brand-text-small">.com</span>
+                </a>
+            </div>
+        </nav>
     );
 }
 
