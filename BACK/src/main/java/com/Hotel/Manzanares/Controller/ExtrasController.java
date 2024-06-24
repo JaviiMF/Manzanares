@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import com.Hotel.Manzanares.Entity.Extras;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,5 +33,10 @@ public class ExtrasController {
     @PutMapping("/updateExtras/{id}")
     public void updateExtras(@PathVariable Long id,@RequestBody Extras extras){
         extrasService.updateExtras(id,extras);
+    }
+
+    @GetMapping("/allExtras")
+    public List<Extras> getAllExtras(){
+        return extrasService.getAllExtras();
     }
 }

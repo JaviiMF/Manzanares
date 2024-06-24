@@ -23,6 +23,11 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id);
     }
 
+    public Usuario getUsuarioDNI(String dni){
+        return customerRepository.findByDni(dni);
+    }
+
+
     @Override
     public void createUsuario(Usuario usuario) {
         try{

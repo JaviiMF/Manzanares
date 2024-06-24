@@ -37,4 +37,8 @@ public class ServicioController {
         servicioService.updateServicio(id,servicio);
     }
 
+    @GetMapping("/allServicios")
+    public List<Servicio>getAllServicios(){
+        return servicioService.getAllServicios();
+    }
 }
