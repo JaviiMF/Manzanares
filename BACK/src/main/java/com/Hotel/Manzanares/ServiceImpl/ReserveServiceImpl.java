@@ -52,7 +52,7 @@ public class ReserveServiceImpl implements ReserveService {
             Gama gama = gamaRepository.findByNombre(room.getGama().toString())
                     .orElseThrow(() -> new IllegalArgumentException("Gama no encontrada"));
 
-            Double gama_price = gama.getPrecio();
+            Double room_price = room.getPrecio();
 
             // Obtener porcentaje de descuento
             Descuento descuento = descuentoRepository.findById(reserveRequest.getIdDescuento())
@@ -73,7 +73,7 @@ public class ReserveServiceImpl implements ReserveService {
                  extras_price = listaExtras.stream().mapToDouble(Extras::getPrecio).sum();
             }
             // Calcular el precio total de la reserva
-            Double suma_price = gama_price + servicios_price + extras_price;
+            Double suma_price = room_price + servicios_price + extras_price;
             Double total_price = suma_price - (suma_price * (porcentaje_descuento / 100.0));
 
             // Crear la reserva

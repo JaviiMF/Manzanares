@@ -31,6 +31,8 @@ public class Usuario {
     private String horario;
     @Column(name = "activo", columnDefinition = "boolean default true")
     private Boolean activo;
+    private String genero;
+    private String pais;
 
     @Override
     public boolean equals(Object o) {
