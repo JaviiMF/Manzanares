@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function ListaCliente() {
     const [clientes, setClientes] = useState([]);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8080/customer/all")
@@ -20,11 +22,11 @@ export function ListaCliente() {
             });
     }, []);
 
-    // Función para manejar la eliminación de un cliente
+
     const handleDelete = (dni) => {
         const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este cliente?");
         if (!confirmDelete) {
-            return; // Si el usuario cancela, no hacemos nada
+            return; 
         }
 
         fetch(`http://localhost:8080/customer/deleteUsuario/${dni}`, {
@@ -40,6 +42,10 @@ export function ListaCliente() {
         .catch(error => {
             setError(error.message);
         });
+    };
+
+    const handleEdit = (dni) => {
+        navigate(`/editar/${dni}`); 
     };
 
     return (
@@ -59,7 +65,6 @@ export function ListaCliente() {
                             <th>Email</th>
                             <th>DNI</th>
                             <th>Teléfono</th>
-                            <th>Acciones</th> {/* Columna para acciones */}
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +75,11 @@ export function ListaCliente() {
                                 <td>{cliente.email}</td>
                                 <td>{cliente.dni}</td>
                                 <td>{cliente.telefono}</td>
+                                <td>
+                                    <button type="button" onClick={() => handleEdit(cliente.dni)}>
+                                        Editar
+                                    </button>
+                                </td>
                                 <td>
                                     <button type="button" onClick={() => handleDelete(cliente.dni)}>
                                         Borrar

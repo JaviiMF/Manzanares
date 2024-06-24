@@ -9,6 +9,7 @@ import './components/Recepcionista/Estilos.css';
 import { ListaOfertas } from './components/Recepcionista/ListaOfertas';
 import { Clientes } from './components/Recepcionista/Clientes';
 import { ListaCliente } from './components/Recepcionista/ListaCliente';
+import { EditaCliente } from './components/Recepcionista/EditaCliente';
 import RoomAviable from './components/RoomAviable';
 import CrearReserva from './components/Recepcionista/CrearReserva';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/gestion-clientes" element={<Clientes/>} />
         <Route path="/clientes" element={<ListaCliente/>}/>
         <Route path="/ofertas" element={<ListaOfertas/>}/>
+        <Route path="/editar/:dniAux" element={<EditaCliente />} />
         <Route path="/room-aviable" element={<RoomAviable />} />
         <Route path="/CrearReserva" element={<CrearReserva/>}/>
       </Routes>
