@@ -12,7 +12,9 @@ public interface CustomerService {
 
     Optional<Usuario> getUsuario(Long id);
 
-    Optional<Usuario>getUsuarioDni(String dni);
+
+    Usuario getUsuarioDNI(String dni);
+
     void createUsuario(Usuario usuario);
 
     void deleteUsuario(String dni);

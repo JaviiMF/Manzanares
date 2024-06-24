@@ -23,7 +23,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id);
     }
 
-    public Optional<Usuario>getUsuarioDni(String dni){return Optional.ofNullable(customerRepository.findByDni(dni));}
+    public Usuario getUsuarioDNI(String dni){
+        return customerRepository.findByDni(dni);
+    }
+
 
     @Override
     public void createUsuario(Usuario usuario) {
