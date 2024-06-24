@@ -13,6 +13,47 @@
   }
 }
 
+/* Contenedor principal */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Altura mínima para ocupar toda la ventana */
+}
+
+/* Estilos para el Navbar */
+.navbar {
+  flex-shrink: 0; /* Evita que el Navbar se reduzca */
+  height: 80px; /* Altura fija del Navbar */
+  width: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para separación visual */
+  position: fixed; /* Fija el Navbar en la parte superior */
+  top: 0; /* Pega el Navbar a la parte superior de la pantalla */
+  left: 0; /* Asegura que el Navbar comience desde la izquierda */
+  z-index: 1000; /* Asegura que el Navbar esté por encima del contenido */
+}
+
+/* Estilos para el contenido principal */
+.content {
+  flex: 1; /* Permite que el contenido se expanda para llenar el espacio disponible */
+  padding: 20px;
+  margin-top: 60px; /* Compensa la altura del Navbar fijo */
+  margin-bottom: 40px; /* Compensa la altura del Footer */
+  overflow: auto; /* Permite scroll si el contenido es grande */
+}
+
+/* Estilos para el Footer */
+.footer {
+  flex-shrink: 0; /* Evita que el Footer se reduzca */
+  height: 90px; /* Altura fija del Footer */
+  width: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra para separación visual */
+  text-align: center;
+  padding: 10px;
+  position: relative; /* Asegura que el Footer se mantenga en el flujo del documento */
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

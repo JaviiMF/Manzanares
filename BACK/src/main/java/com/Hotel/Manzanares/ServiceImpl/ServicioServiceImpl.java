@@ -48,6 +48,7 @@ public class ServicioServiceImpl implements ServicioService {
         try{
             Servicio elemento = servicioRepository.findServicioById(id);
             if(elemento!=null){
+                elemento.setNombre(servicio.getNombre());
                 elemento.setDescripcion(servicio.getDescripcion());
                 elemento.setPrecio(servicio.getPrecio());
                 elemento.setHorario(servicio.getHorario());

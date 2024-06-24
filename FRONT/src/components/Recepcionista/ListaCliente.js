@@ -45,13 +45,13 @@ export function ListaCliente() {
     };
 
     const handleEdit = (dni) => {
-        navigate(`/editar/${dni}`); 
+        navigate(`/clientes/editar/${dni}`); 
     };
 
     return (
-        <div>
-            <h3 className="form-title">Listado de Clientes</h3>
-            <h4 className="form-description">En esta página puedes acceder a todos 
+        <div >
+            <h3 className="list-title">Listado de Clientes</h3>
+            <h4 className="list-description">En esta página puedes acceder a todos 
                 los datos sobre los usuarios, incluyendo sus reservas.</h4>
 
             {error ? (
@@ -76,12 +76,10 @@ export function ListaCliente() {
                                 <td>{cliente.dni}</td>
                                 <td>{cliente.telefono}</td>
                                 <td>
-                                    <button type="button" onClick={() => handleEdit(cliente.dni)}>
+                                    <button type="button" className="edit-button" onClick={() => handleEdit(cliente.dni)}>
                                         Editar
                                     </button>
-                                </td>
-                                <td>
-                                    <button type="button" onClick={() => handleDelete(cliente.dni)}>
+                                    <button type="button" className="delete-button" onClick={() => handleDelete(cliente.dni)}>
                                         Borrar
                                     </button>
                                 </td>
