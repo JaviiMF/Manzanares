@@ -7,7 +7,7 @@ export function BuscaCliente() {
 
     const handleSubmit = (event) => {
         event.preventDefault();  
-        
+       
         axios.get(`http://localhost:8081/customer/find/${dni}`)
             .then(response => {
                 setMensaje(`Usuario encontrado: ${response.data.nombre} ${response.data.apellidos}`);
