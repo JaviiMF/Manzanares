@@ -5,6 +5,23 @@
     flex-direction: column;
     text-align: center;
     margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.register-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.margin-div {
+    margin-top: 50%;
 }
 
 .form-title {
@@ -108,11 +125,22 @@
 label {
     margin-bottom: 5px;
     align-self: flex-start;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
+
+textarea {
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
 
 input {
     padding: 8px;
     width: 200px; /* Ajustar el ancho de los inputs */
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 .cliente-table {
@@ -148,12 +176,16 @@ input {
     align-items: left;
     text-align: left;
     margin-top: 20px;
-    width: 80%; /* Ajusta este valor según tus necesidades */
+    width: 100%; /* Ajusta este valor según tus necesidades */
     margin: 20px auto; /* 20px de margen arriba y abajo, centrado horizontalmente */
-    border-collapse: collapse;
-    
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-width: 40px;
 }
 
+/* Estilo para las celdas de la primera columna */
 .service-table th:first-child,
 .service-table td:first-child {
     width: 250px; /* Ajusta este valor según tus necesidades */
@@ -161,9 +193,13 @@ input {
     white-space: normal; /* Permite que el texto se divida en varias líneas */
     overflow: visible; /* Permite que el contenido se muestre completamente */
     text-overflow: clip; /* Elimina la elipsis */
+    padding: 10px; /* Añade espacio interno alrededor del texto */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total de la celda */
 }
 
-.service-table th, .cliente-table td {
+
+
+.service-table th, .service-table td {
     border: 1px solid #ddd;
     padding: 8px;
 }

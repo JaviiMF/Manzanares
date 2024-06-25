@@ -12,46 +12,42 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-/* Contenedor principal */
+/* Estilo base para el contenedor de la aplicación */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Altura mínima para ocupar toda la ventana */
+  min-height: 100vh; /* Ocupa al menos la altura completa de la ventana */
 }
 
-/* Estilos para el Navbar */
+/* Estilo para el Navbar */
 .navbar {
-  flex-shrink: 0; /* Evita que el Navbar se reduzca */
-  height: 80px; /* Altura fija del Navbar */
-  width: 100%;
+  position: sticky; /* Fija el Navbar en la parte superior */
+  top: 0;
+  height: 80px; /* Ajusta la altura según sea necesario */
   background-color: #f8f9fa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para separación visual */
-  position: fixed; /* Fija el Navbar en la parte superior */
-  top: 0; /* Pega el Navbar a la parte superior de la pantalla */
-  left: 0; /* Asegura que el Navbar comience desde la izquierda */
-  z-index: 1000; /* Asegura que el Navbar esté por encima del contenido */
+  z-index: 100; /* Asegura que el Navbar esté por encima del contenido */
+
 }
 
-/* Estilos para el contenido principal */
+/* Ajuste del contenido principal */
 .content {
-  flex: 1; /* Permite que el contenido se expanda para llenar el espacio disponible */
-  padding: 20px;
-  margin-top: 60px; /* Compensa la altura del Navbar fijo */
-  margin-bottom: 40px; /* Compensa la altura del Footer */
-  overflow: auto; /* Permite scroll si el contenido es grande */
+  margin-top: 80px; /* Compensa la altura del Navbar */
+  flex: 1; /* Permite que el contenido principal crezca y llene el espacio disponible */
+  padding: 20px; /* Añade espacio alrededor del contenido */
+  overflow: auto; /* Permite desplazamiento si el contenido es grande */
+  box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+  margin-bottom: 80px;
 }
 
-/* Estilos para el Footer */
+/* Estilo para el Footer */
 .footer {
-  flex-shrink: 0; /* Evita que el Footer se reduzca */
-  height: 90px; /* Altura fija del Footer */
-  width: 100%;
-  background-color: #f8f9fa;
+  bottom: 0;
+  height: 80px; /* Ajusta la altura según sea necesario */
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra para separación visual */
   text-align: center;
-  padding: 10px;
-  position: relative; /* Asegura que el Footer se mantenga en el flujo del documento */
+  flex: 0 0 50px;
+  margin-top: auto;
 }
 
 .App-header {

@@ -16,9 +16,11 @@ import { CreaServicio } from './components/Webmaster/CreaServicio';
 import { EditaServicio } from './components/Webmaster/EditaServicio';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import Login from './components/Login/Login';
+import Register  from './components/Register/Register';
 import Rutas from './Rutas';
 //import './components/Footer/Footer.css';
-import './components/Navbar/Navbar.css';
+//import './components/Navbar/Navbar.css';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <main className="content">
           <Routes>
             <Route path="/" element={<Home />} /> 
+            <Route path='/login' element={<Login/>}/> 
+            <Route path='/register' element={<Register/>}/> 
             <Route path="/gestion-clientes" element={<Clientes/>} />
             <Route path="/clientes" element={<ListaCliente/>}/>
             <Route path="/servicios" element={<ListaServicios/>}/>
