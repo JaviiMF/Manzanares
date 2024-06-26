@@ -2,9 +2,8 @@ package com.Hotel.Manzanares.Controller;
 
 import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.LoginRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.Hotel.Manzanares.Service.CustomerService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CustomerController {
 
+    @Autowired
     private final CustomerService customerService;
 
     @GetMapping("/{id}")
@@ -49,5 +49,10 @@ public class CustomerController {
     @GetMapping("/all")
     public List<Usuario> getAllUsuarios(){
         return customerService.getAllUsuarios();
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest loginRequest){
+        return customerService.loginUsuario(loginRequest);
     }
 }

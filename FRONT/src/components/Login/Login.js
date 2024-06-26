@@ -1,27 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const { email, password } = formData;
+
+    const navigate = useNavigate();
+
+    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    const onSubmit = async e => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8080/customer/login', {
+                usuario: email,
+                pass: password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.status === 200) {
+                // Almacenar el ID del usuario en la memoria local
+                if (response.data !== "") {
+                    localStorage.setItem('userDni', response.data);
+                    console.log('Usuario ingresó con éxito');
+                    navigate("/");
+                } else {
+                    localStorage.setItem('userDni', null);
+                    alert("Usuario no encontrado");
+                }
+
+            } else {
+                console.error('Error al iniciar sesión');
+            }
+        } catch (error) {
+            console.error('Error en la solicitud', error);
+        }
+    };
+
     return (
         <div>
             <Navbar />
             <div className="login-container">
                 <h3 className="text-center">Inicia Sesión</h3>
                 <p className="text-center">Accede a un sinfín de opciones de viaje con una sola cuenta en Manzanares.com</p>
-                <form>
+                <form onSubmit={onSubmit}>
                     <div className="form-group mb-3">
                         <label htmlFor="email">Correo Electrónico</label>
-                        <input type="email" className="form-control" id="email"
-                               placeholder="Ingrese su correo electrónico"/>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            name="email"
+                            value={email}
+                            onChange={onChange}
+                            placeholder="Ingrese su correo electrónico"
+                            required
+                        />
                     </div>
                     <div className="form-group mb-3">
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" className="form-control" id="password"
-                               placeholder="Ingrese su contraseña"/>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={onChange}
+                            placeholder="Ingrese su contraseña"
+                            required
+                        />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block">Ingresar</button>
+                    <div className="form-group mb-3">
+                        <button type="submit" className="btn btn-primary btn-block">Ingresar</button>
+                    </div>
                     <div className="form-group text-center mt-3">
                         <a href="#">¿Olvidó su contraseña?</a>
                     </div>
@@ -29,9 +90,6 @@ const Login = () => {
                         <a href="/Register">¿Aún no tienes cuenta?</a>
                     </div>
                 </form>
-            </div>
-            <div>
-                <Footer/>
             </div>
         </div>
     );
