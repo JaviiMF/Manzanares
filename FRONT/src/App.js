@@ -6,7 +6,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/Recepcionista/Estilos.css';
-import { ListaOfertas } from './components/Recepcionista/ListaOfertas';
+import { ListaServicios } from './components/Recepcionista/ListaServicios';
 import { Clientes } from './components/Recepcionista/Clientes';
 import { ListaCliente } from './components/Recepcionista/ListaCliente';
 import { EditaCliente } from './components/Recepcionista/EditaCliente';
@@ -25,7 +25,6 @@ import Rutas from './Rutas';
 function App() {
   return (
     <Router>
-        <Route path="/ofertas" element={<ListaOfertas/>}/>
       <div className="app-container">
         <Navbar />
         <main className="content">
