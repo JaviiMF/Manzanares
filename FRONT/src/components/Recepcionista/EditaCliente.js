@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useParams, useNavigate } from "react-router-dom";
 
-export function AltaCliente() {
+export function EditaCliente() {
     const [nombre, setNombre] = useState('');
     const [dni, setDni] = useState('');
     const [contrasena, setContrasena] = useState('');
@@ -14,8 +15,32 @@ export function AltaCliente() {
     const [genero, setGenero] = useState('masculino');
     const [error, setError] = useState('');
     const [direccion, setDireccion] = useState('');
+    const { dniAux } = useParams();
+    const navigate = useNavigate();
 
-    // Función para validar si las contraseñas coinciden
+    useEffect(() => {
+        // Fetch user data
+        axios.get(`http://localhost:8080/customer/find/${dniAux}`)
+            .then(response => {
+                const cliente = response.data;
+                setNombre(cliente.nombre);
+                setDni(cliente.dni);
+                setContrasena(''); // Clear password fields
+                setConfPassword('');
+                setFechaNacimiento(cliente.fechaNacimiento);
+                setPais(cliente.pais);
+                setApellidos(cliente.apellidos);
+                setEmail(cliente.email);
+                setTelefono(cliente.telefono);
+                setGenero(cliente.genero);
+                setDireccion(cliente.direccion);
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos del cliente:', error);
+                setError('Error al cargar los datos del cliente.');
+            });
+    }, [dniAux]);
+
     const validatePasswords = () => {
         return contrasena === confPassword;
     };
@@ -28,47 +53,34 @@ export function AltaCliente() {
             return;
         }
 
-        const data = {
-            nombre,
-            dni,
-            contrasena,
-            fechaNacimiento,
-            pais,
-            apellidos,
-            email,
-            telefono,
-            genero,
-            direccion
-        };
+        const data = {};
+        if (nombre) data.nombre = nombre;
+        if (dni) data.dni = dni;
+        if (contrasena) data.contrasena = contrasena;
+        if (fechaNacimiento) data.fechaNacimiento = fechaNacimiento;
+        if (pais) data.pais = pais;
+        if (apellidos) data.apellidos = apellidos;
+        if (email) data.email = email;
+        if (telefono) data.telefono = telefono;
+        if (genero) data.genero = genero;
+        if (direccion) data.direccion = direccion;
 
-        axios.post('http://localhost:8080/customer/createUsuario', data)
+        axios.put(`http://localhost:8080/customer/updateUsuario/${dniAux}`, data)
             .then(response => {
-                alert('Usuario creado exitosamente');
-                // Limpiar formulario después de la creación exitosa
-                setNombre('');
-                setDni('');
-                setContrasena('');
-                setFechaNacimiento('');
-                setPais('');
-                setApellidos('');
-                setEmail('');
-                setConfPassword('');
-                setTelefono('');
-                setGenero('masculino');
-                setDireccion('');
-                setError('');
+                alert(`Usuario actualizado exitosamente ${dniAux}`);
+                navigate('/'); // Redirigir a la lista de clientes u otra vista
             })
             .catch(error => {
-                console.error('Hubo un error al crear el usuario:', error);
-                alert('Error al crear el usuario');
+                console.error('Hubo un error al actualizar el usuario:', error);
+                alert('Error al actualizar el usuario');
             });
     };
 
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit}>
-                <h3 className="form-title">Crear Clientes</h3>
-                <h4 className="form-description">En esta página se crean las cuentas de los clientes</h4>
+                <h3 className="form-title">Editar Cliente</h3>
+                <h4 className="form-description">En esta página se pueden editar las cuentas de los clientes</h4>
                 
                 {error && <p className="error-message">{error}</p>}
 
@@ -125,7 +137,7 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="genero">Genero </label>    
+                            <label htmlFor="genero">Género </label>    
                             <select 
                                 name="genero" 
                                 id="genero" 
@@ -151,7 +163,7 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">Email </label>    
+                            <label htmlFor="email">Email </label>    
                             <input 
                                 type="email" 
                                 name="email" 
@@ -171,7 +183,7 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="tlf"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>Telefono </label>    
+                            <label htmlFor="tlf">Teléfono </label>    
                             <input 
                                 type="tel" 
                                 name="tlf" 
@@ -181,7 +193,7 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="direccion">Direccion </label>    
+                            <label htmlFor="direccion">Dirección </label>    
                             <input 
                                 type="text" 
                                 name="direccion" 
@@ -190,12 +202,11 @@ export function AltaCliente() {
                                 onChange={(e) => setDireccion(e.target.value)} 
                             />
                         </div>
-                        
                     </div>               
                 </div>
 
                 <div className="submit-group">
-                    <input type="submit" value="Crear" className="submit-button" />
+                    <input type="submit" value="Editar" className="submit-button" />
                 </div>
             </form>       
         </div>
