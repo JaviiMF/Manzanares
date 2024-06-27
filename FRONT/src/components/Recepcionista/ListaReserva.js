@@ -44,7 +44,12 @@ const ListarReservas = () => {
     }
   };
 
-  const handleEditarReserva = (idReserva) => {
+  const handleEditarReserva = (idReserva, isActive) => {
+   
+    if(isActive==false){
+      handleActivarDesactivarReserva(idReserva, isActive)
+    }
+
     navigate(`/editarReserva/${idReserva}`); // Usamos navigate en lugar de history.push
   };
 
@@ -79,7 +84,7 @@ const ListarReservas = () => {
                 </button>
                 <button
                   className="btn btn-outline-primary btn-sm"
-                  onClick={() => handleEditarReserva(reserva.id)}
+                  onClick={() => handleEditarReserva(reserva.id,  !reserva.activa)}
                 >
                   Editar
                 </button>

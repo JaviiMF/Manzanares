@@ -20,4 +20,6 @@ public interface ReserveService {
     void updateActivate(Long id, boolean isActive);
 
     Optional<Reserva> getReserva(Long id);
+
+    String updateReserve(Long id, ReserveRequest reserveRequest);
 }

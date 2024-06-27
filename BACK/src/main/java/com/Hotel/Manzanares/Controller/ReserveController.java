@@ -24,6 +24,12 @@ public class ReserveController {
         return reserveService.createReserve(reserveRequest);
     }
 
+    @PutMapping("/updateReserve/{id}")
+    public ResponseEntity<String> updateReserve(@PathVariable Long id, @RequestBody ReserveRequest reserveRequest) {
+        String response = reserveService.updateReserve(id, reserveRequest);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/payReserve")
     public Boolean payReserve(){
         return reserveService.payReserve();
@@ -39,7 +45,7 @@ public class ReserveController {
         reserveService.updateActivate(id, reserva.isActiva());
     }
 
-    @GetMapping ("/{id}")
+    @GetMapping ("/get/{id}")
     public Optional<Reserva> getReserva(@PathVariable Long id){
         return reserveService.getReserva(id);
     }

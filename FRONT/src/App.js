@@ -31,10 +31,11 @@ function App() {
             <Route path="/room-aviable" element={<RoomAviable />} />
             <Route path="/CrearReserva" element={<CrearReserva />} />
             <Route path="/ListaReserva" element={<ListaReserva />} />
-            <Route path="/editarReserva/:id" element={<EditarReserva />} />
+            <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
+            
           </Routes>
         </main>
-        <Footer />
+        
       </div>
     </Router>
   );
