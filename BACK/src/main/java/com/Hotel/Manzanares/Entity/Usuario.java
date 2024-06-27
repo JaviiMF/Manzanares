@@ -20,7 +20,7 @@ public class Usuario {
     private Long id;
 
     private String email;
-    @Column(name = "contraseña")
+    //@Column(name = "contraseña")
     private String contrasena;
     private String nombre;
     private String telefono;

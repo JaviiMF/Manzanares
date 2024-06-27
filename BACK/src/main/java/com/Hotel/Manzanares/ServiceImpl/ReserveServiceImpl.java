@@ -8,9 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -49,7 +49,7 @@ public class ReserveServiceImpl implements ReserveService {
             Habitacion room = roomRepository.findById(reserveRequest.getIdHabitacion())
                     .orElseThrow(() -> new IllegalArgumentException("Habitación no encontrada"));
 
-            Gama gama = gamaRepository.findByNombre(room.getGama().toString())
+            Gama gama = gamaRepository.findGamaById(Long.valueOf(room.getGama()))
                     .orElseThrow(() -> new IllegalArgumentException("Gama no encontrada"));
 
             Double room_price = room.getPrecio();
@@ -59,18 +59,18 @@ public class ReserveServiceImpl implements ReserveService {
                     .orElseThrow(() -> new IllegalArgumentException("Descuento no encontrado"));
 
             Integer porcentaje_descuento = descuento.getPorcentaje();
-            Double servicios_price=0.0;
-            if(reserveRequest.getListaServicios()!=null){
+            Double servicios_price = 0.0;
+            if (reserveRequest.getListaServicios() != null) {
                 // Obtener lista de servicios y calcular el precio total
                 List<Servicio> listaServicios = servicioRepository.findAllById(reserveRequest.getListaServicios());
-                 servicios_price = listaServicios.stream().mapToDouble(Servicio::getPrecio).sum();
+                servicios_price = listaServicios.stream().mapToDouble(Servicio::getPrecio).sum();
             }
 
-            Double extras_price=0.0;
-            if(reserveRequest.getListaExtras()!=null) {
+            Double extras_price = 0.0;
+            if (reserveRequest.getListaExtras() != null) {
                 // Obtener lista de extras y calcular el precio total
                 List<Extras> listaExtras = extrasRepository.findAllById(reserveRequest.getListaExtras());
-                 extras_price = listaExtras.stream().mapToDouble(Extras::getPrecio).sum();
+                extras_price = listaExtras.stream().mapToDouble(Extras::getPrecio).sum();
             }
             // Calcular el precio total de la reserva
             Double suma_price = room_price + servicios_price + extras_price;
@@ -84,19 +84,19 @@ public class ReserveServiceImpl implements ReserveService {
             reserva.setFechaCheckin(new SimpleDateFormat("yyyy-MM-dd").parse(reserveRequest.getFechaInicio()));
             reserva.setFechaCheckout(new SimpleDateFormat("yyyy-MM-dd").parse(reserveRequest.getFechaFin()));
             reserva.setIdDescuento(reserveRequest.getIdDescuento());
-            if(reserveRequest.getListaServicios()!=null) {
+            if (reserveRequest.getListaServicios() != null) {
                 reserva.setListaServicios(reserveRequest.getListaServicios().toString());
-            }else{
+            } else {
                 reserva.setListaServicios(null);
             }
 
-            if(reserveRequest.getListaExtras()!=null) {
+            if (reserveRequest.getListaExtras() != null) {
                 reserva.setListaExtras(reserveRequest.getListaExtras().toString());
-            }else{
+            } else {
                 reserva.setListaExtras(null);
             }
             reserva.setPrecioTotal(total_price);
-
+            reserva.setActiva(true);
             // Guardar la reserva en el repositorio
             reserveRepository.save(reserva);
 
@@ -118,5 +118,17 @@ public class ReserveServiceImpl implements ReserveService {
     @Override
     public List<Reserva> getReservasActivas() {
         return reserveRepository.findAll();
+    }
+
+    @Override
+    public void updateActivate(Long id, boolean isActive) {
+        Reserva reserva = reserveRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Reserva no encontrada"));
+        reserva.setActiva(isActive);
+        reserveRepository.save(reserva);
+    }
+
+    @Override
+    public Optional<Reserva> getReserva(Long id) {
+        return reserveRepository.findById(id);
     }
 }
