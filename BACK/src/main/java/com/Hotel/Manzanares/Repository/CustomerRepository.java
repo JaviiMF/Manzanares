@@ -18,6 +18,6 @@ public interface CustomerRepository extends JpaRepository<Usuario, Long> {
 
     public Usuario findByDni(String dni);
 
-    @Query("select u from Usuario u where u.email=:usuario and u.contrasena=:pass")
-    Usuario findByUsuarioAndPass(@Param("usuario") String usuario, @Param("pass") String pass);
+    @Query("select u.dni from Usuario u where u.email=:usuario and u.password=:pass")
+    String findByUsuarioAndPass(@Param("usuario") String usuario, @Param("pass") String pass);
 }

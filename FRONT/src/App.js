@@ -30,8 +30,8 @@ function App() {
         <main className="content">
           <Routes>
             <Route path="/" element={<Home />} /> 
-            <Route path='/login' element={<Login/>}/> 
-            <Route path='/register' element={<Register/>}/> 
+            <Route path='/Login' element={<Login/>}/> 
+            <Route path='/Register' element={<Register/>}/> 
             <Route path="/gestion-clientes" element={<Clientes/>} />
             <Route path="/clientes" element={<ListaCliente/>}/>
             <Route path="/servicios" element={<ListaServicios/>}/>

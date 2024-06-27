@@ -15,6 +15,7 @@ import java.util.Optional;
 public class DescuentoServiceImpl implements DescuentoService {
 
     private final DescuentoRepository descuentoRepository;
+
     @Override
     public Optional<Descuento> getDescuento(Long id) {
         return descuentoRepository.findDescuentoById(id);

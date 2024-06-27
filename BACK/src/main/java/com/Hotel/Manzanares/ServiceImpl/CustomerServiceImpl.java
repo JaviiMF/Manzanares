@@ -5,6 +5,7 @@ import com.Hotel.Manzanares.Request.LoginRequest;
 import com.Hotel.Manzanares.Service.CustomerService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.Hotel.Manzanares.Repository.CustomerRepository;
 
@@ -63,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
                 elemento.setDni(usuario.getDni());
                 elemento.setHorario(usuario.getHorario());
                 elemento.setEmail(usuario.getEmail());
-                elemento.setContrasena(usuario.getContrasena());
+                elemento.setPassword(usuario.getPassword());
                 elemento.setTipo(usuario.getTipo());
                 elemento.setNombre(usuario.getNombre());
                 elemento.setTelefono(usuario.getTelefono());
@@ -77,18 +78,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public String loginUsuario(LoginRequest loginRequest) {
-        String tipo = "";
+
+        String dni = null;
 
        try{
-           Usuario usuario = customerRepository.findByUsuarioAndPass(loginRequest.getUsuario(), loginRequest.getPass());
-           if(usuario != null){
-               tipo = usuario.getTipo();
+           String dniUsuario = customerRepository.findByUsuarioAndPass(loginRequest.getUsuario(), loginRequest.getPass());
+           if(dniUsuario != null){
+               dni = dniUsuario;
            }
        } catch (Exception e) {
            System.out.println("Error en el login" + e.getMessage());
        }
 
-        return tipo;
+        return dni;
     }
 
     @Override
