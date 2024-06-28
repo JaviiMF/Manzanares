@@ -24,6 +24,10 @@
     border-color: #0056b3;
   }
   
+
+
+
+
   .alert {
     margin-top: 20px;
   }
@@ -36,4 +40,24 @@
     margin-top: 0.3rem;
     margin-right: 0.5rem;
   }
+
+
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+  }
   
+  .habitacion-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .habitacion-card.selected {
+    border-color: #007bff;
+    background-color: #e7f3ff;
+  }

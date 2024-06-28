@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './CrearReserva.css'; // Asegúrate de importar tu archivo CSS
+import './CrearReserva.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import axios from 'axios';
+import { useParams, useNavigate } from "react-router-dom";
 
 function CrearReserva() {
   const [dni, setDni] = useState('');
@@ -21,14 +22,22 @@ function CrearReserva() {
   const [mensaje, setMensaje] = useState('');
   const [dniValido, setDniValido] = useState(true); // Estado para el DNI válido
   const [precioTotal, setPrecioTotal] = useState(0); // Estado para el precio total
+  const { idReserva } = useParams();
+  const navigate = useNavigate();
+  const [reservas, setReservas] = useState([]);
+  const [numerosHabitacion, setNumerosHabitacion] = useState([]);
+
+  useEffect(() => {
+    fetchDescuentos();
+    fetchExtras();
+    fetchServicios();
+    cargarReservas();
+  }, []);
 
   useEffect(() => {
     if (fechaEntrada && fechaSalida) {
       fetchHabitacionesDisponibles(fechaEntrada, fechaSalida);
     }
-    fetchDescuentos();
-    fetchExtras();
-    fetchServicios();
   }, [fechaEntrada, fechaSalida]);
 
   useEffect(() => {
@@ -53,13 +62,7 @@ function CrearReserva() {
       }
     } catch (error) {
       setDniValido(false);
-      if (error.response) {
-        console.error('Error response:', error.response);
-      } else if (error.request) {
-        console.error('Error request:', error.request);
-      } else {
-        console.error('Error message:', error.message);
-      }
+      console.error('Error:', error);
     }
   };
 
@@ -115,7 +118,7 @@ function CrearReserva() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8081/reserve/createReserve', {
+      const response = await axios.put(`http://localhost:8081/reserve/updateReserve/${idReserva}`, {
         dniCliente: dni,
         fechaInicio: fechaEntrada,
         fechaFin: fechaSalida,
@@ -124,7 +127,7 @@ function CrearReserva() {
         listaExtras: extrasSeleccionados.map(extra => extra.id),
         listaServicios: serviciosSeleccionados.map(servicio => servicio.id)
       });
-      setMensaje('Reserva creada exitosamente');
+      setMensaje('Reserva actualizada exitosamente');
       setDni('');
       setFechaEntrada('');
       setFechaSalida('');
@@ -133,6 +136,8 @@ function CrearReserva() {
       setExtrasSeleccionados([]);
       setServiciosSeleccionados([]);
       setPrecioTotal(0); // Resetear el precio total
+      navigate(-1);
+
     } catch (error) {
       console.error('Error creating reservation', error);
       setError('Error al crear la reserva. Por favor, intenta nuevamente.');
@@ -179,19 +184,13 @@ function CrearReserva() {
 
   const getMarginTop = () => {
     const baseMargin = 100; // Margen base de 80px
-    const additionalMargin = Math.ceil(habitacionesDisponibles.length / 3) * 500; // 80px adicionales por cada 3 elementos
+    const additionalMargin = Math.ceil(habitacionesDisponibles.length / 3) * 575; // 80px adicionales por cada 3 elementos
     return baseMargin + additionalMargin;
   };
 
   const obtenerMascota = (habitacion) => {
     const mascota = habitacion.mascotas;
-    //console.log(mascota);
-    let permitido = 'No permitidas'
-    if (mascota == true) {
-      permitido = 'Permitidas'
-    }
-
-    return permitido;
+    return mascota ? 'Permitidas' : 'No permitidas';
   };
 
   const obtenerRutaImagen = (habitacion) => {
@@ -245,8 +244,62 @@ function CrearReserva() {
       const descuentoAplicado = total * (descuentoSeleccionado.porcentaje / 100);
       total -= descuentoAplicado;
     }
-  
+    total = parseFloat(total.toFixed(2));
     setPrecioTotal(total);
+  };
+
+  const formatoPrecio = (precio) => {
+    if (typeof precio !== 'number') {
+      return ''; // Manejo de valores no numéricos, si es necesario
+    }
+    return precio.toFixed(2); // Redondea el precio a dos decimales y lo convierte en string
+  };
+
+  const cargarReservas = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8081/reserve/get/${idReserva}`);
+      console.log(response.data);
+  
+      // Convertir el response.data en un array si no lo es
+      const reservas = Array.isArray(response.data) ? response.data : [response.data];
+      setReservas(reservas);
+  
+      // Obtener el número de habitación directamente del objeto reserva
+      const numeroHabitacion = await obtenerNumeroHabitacion(reservas[0].idHabitacion);
+      setNumerosHabitacion([numeroHabitacion]); // Puedes almacenarlo en un array si lo necesitas
+    } catch (error) {
+      console.error('Error cargando reservas:', error);
+    }
+  };
+  
+  const obtenerNumeroHabitacion = async (idHabitacion) => {
+    try {
+      const response = await axios.get(`http://localhost:8081/room/${idHabitacion}`);
+      console.log(response.data.num);
+      return response.data.num;
+    } catch (error) {
+      console.error('Error obteniendo número de habitación:', error);
+      return '';
+    }
+  };
+
+
+  const handleActivarDesactivarReserva = async (idReserva) => {
+    try {
+      await axios.put(`http://localhost:8081/reserve/${idReserva}/activate`, { activa: true });
+      
+    } catch (error) {
+      console.error('Error activando/desactivando reserva:', error);
+    }
+  };
+
+  const handleVolver = async () => {
+    try {
+      await handleActivarDesactivarReserva(idReserva);
+      navigate(-1); // Volver a la página anterior en el historial
+    } catch (error) {
+      console.error('Error activando/desactivando reserva:', error);
+    }
   };
 
   return (
@@ -379,15 +432,47 @@ function CrearReserva() {
           {error && <div className="alert alert-danger mt-4">{error}</div>}
 
           <button type="submit" className="btn btn-primary mt-4" disabled={!dni || !fechaEntrada || !fechaSalida || !descuento || !habitacion}>
-            Crear Reserva
+            Actualizar Reserva
+          </button>
+
+          <button onClick={handleVolver} className="btn btn-primary mt-4">
+            Cancelar
           </button>
         </form>
         <div className="mt-4">
           {mensaje && <p>{mensaje}</p>}
           <h4>Precio Total: ${precioTotal}</h4>
         </div>
+        <div className="row mt-5">
+          <div className="col">
+            <h2>Reserva</h2>
+            <table className="table text-center">
+              <thead>
+                <tr>
+                  <th scope="col">DNI Cliente</th>
+                  <th scope="col">Número de Habitación</th>
+                  <th scope="col">Fecha Checkin</th>
+                  <th scope="col">Fecha Checkout</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col ">Precio total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservas.map((reserva, index) => (
+                  <tr key={reserva.id}>
+                    <td>{reserva.dniCliente}</td>
+                    <td>{numerosHabitacion[index]}</td>
+                    <td>{reserva.fechaCheckin ? reserva.fechaCheckin.split('T')[0] : ''}</td>
+                    <td>{reserva.fechaCheckout ? reserva.fechaCheckout.split('T')[0] : ''}</td>
+                    <td>{reserva.activa ? 'Activa' : 'Inactiva'}</td>
+                    <td>{formatoPrecio(reserva.precioTotal)} €</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -19,4 +19,6 @@ public interface ServicioService {
     void updateServicio(Long id, Servicio servicio);
 
     List<Servicio> getAllServicios();
+
+
 }

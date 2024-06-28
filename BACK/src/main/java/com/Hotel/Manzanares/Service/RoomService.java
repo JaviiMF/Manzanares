@@ -6,6 +6,7 @@ import com.Hotel.Manzanares.Request.DispRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface RoomService {
@@ -17,4 +18,7 @@ public interface RoomService {
     void deleteRoom(Long id);
 
     List<Habitacion> getAllHabitaciones();
+
+    Optional<Habitacion> getRoom(Long id);
+
 }

@@ -1,6 +1,7 @@
 package com.Hotel.Manzanares.Controller;
 
 import com.Hotel.Manzanares.Entity.Habitacion;
+import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.DispRequest;
 import com.Hotel.Manzanares.Service.RoomService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(("/room"))
@@ -26,4 +28,9 @@ public class RoomController {
 
     @PostMapping("/disponibles")
     public List<Habitacion> getHabitacionesDisponibles(@RequestBody DispRequest dispRequest) {return roomService.getHabitacionesDisponibles(dispRequest); }
+
+    @GetMapping("/{id}")
+    public Optional<Habitacion> getRoom(@PathVariable Long id){
+        return roomService.getRoom(id);
+    }
 }

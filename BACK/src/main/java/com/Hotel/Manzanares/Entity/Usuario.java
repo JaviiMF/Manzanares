@@ -18,7 +18,9 @@ public class Usuario {
     private Long id;
 
     private String email;
+
     private String password;
+
     private String nombre;
     private String apellido;
     private String telefono;
@@ -28,6 +30,7 @@ public class Usuario {
     private String horario;
     private Boolean activo;
     private String genero;
+
 
     @Override
     public boolean equals(Object o) {

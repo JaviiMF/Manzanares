@@ -18,6 +18,7 @@ public class ReserveRequest {
     private Long idDescuento;
     private List<Long> listaServicios;
     private List<Long> listaExtras;
+    private boolean activa;
 
 
     // Getters and Setters
@@ -65,6 +66,14 @@ public class ReserveRequest {
         return listaServicios;
     }
 
+    public Boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+
     public void setListaServicios(List<Long> listaServicios) {
         this.listaServicios = listaServicios;
     }
@@ -76,5 +85,7 @@ public class ReserveRequest {
     public void setListaExtras(List<Long> listaExtras) {
         this.listaExtras = listaExtras;
     }
+
+
 
 }
