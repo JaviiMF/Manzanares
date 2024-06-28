@@ -19,19 +19,19 @@ public class Gama {
 
     private String nombre;
     private String descripcion;
-    private Double precio;
+    //private Double precio;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Gama gama = (Gama) o;
-        return Objects.equals(id, gama.id) && Objects.equals(nombre, gama.nombre) && Objects.equals(descripcion, gama.descripcion) && Objects.equals(precio, gama.precio);
+        return Objects.equals(id, gama.id) && Objects.equals(nombre, gama.nombre) && Objects.equals(descripcion, gama.descripcion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, descripcion, precio);
+        return Objects.hash(id, nombre, descripcion);
     }
 
     @Override
@@ -39,8 +39,7 @@ public class Gama {
         return "Gama{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
+                ", descripcion='" + descripcion +
                 '}';
     }
 }

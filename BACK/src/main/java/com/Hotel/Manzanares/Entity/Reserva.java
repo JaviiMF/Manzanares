@@ -47,4 +47,6 @@ public class Reserva {
     @Column(name = "precioTotal")
     private Double precioTotal;
 
+    @Column(name="activa")
+    private boolean activa;
 }

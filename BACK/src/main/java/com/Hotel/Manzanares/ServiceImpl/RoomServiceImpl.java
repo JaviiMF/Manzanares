@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -60,4 +61,7 @@ public class RoomServiceImpl implements RoomService {
     public List<Habitacion> getAllHabitaciones() {
         return roomRepository.findAll();
     }
+
+    @Override
+    public Optional<Habitacion> getRoom(Long id){return roomRepository.findById(id);}
 }

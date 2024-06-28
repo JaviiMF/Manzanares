@@ -1,4 +1,3 @@
-
 import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home/Home';
@@ -7,11 +6,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/Recepcionista/Estilos.css';
 import { ListaServicios } from './components/Recepcionista/ListaServicios';
+
+
 import { Clientes } from './components/Recepcionista/Clientes';
 import { ListaCliente } from './components/Recepcionista/ListaCliente';
 import { EditaCliente } from './components/Recepcionista/EditaCliente';
 import RoomAviable from './components/RoomAviable';
 import CrearReserva from './components/Recepcionista/CrearReserva';
+
 import { CreaServicio } from './components/Webmaster/CreaServicio';
 import { EditaServicio } from './components/Webmaster/EditaServicio';
 import Navbar from './components/Navbar/Navbar';
@@ -22,6 +24,10 @@ import Rutas from './Rutas';
 //import './components/Footer/Footer.css';
 //import './components/Navbar/Navbar.css';
 
+import ListaReserva from './components/Recepcionista/ListaReserva';
+import EditarReserva from './components/Recepcionista/EditarReserva';
+
+
 function App() {
   return (
     <Router>
@@ -29,6 +35,7 @@ function App() {
         <Navbar />
         <main className="content">
           <Routes>
+
             <Route path="/" element={<Home />} /> 
             <Route path='/Login' element={<Login/>}/> 
             <Route path='/Register' element={<Register/>}/> 
@@ -40,9 +47,12 @@ function App() {
             <Route path="/CrearReserva" element={<CrearReserva/>}/>
             <Route path="/gestion-servicio" element={<CreaServicio/>}/>
             <Route path="/servicios/editar/:idAux" element={<EditaServicio />} />
+            <Route path="/ListaReserva" element={<ListaReserva />} />
+            <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
           </Routes>
         </main>
         <Footer />
+
       </div>
     </Router>
   );

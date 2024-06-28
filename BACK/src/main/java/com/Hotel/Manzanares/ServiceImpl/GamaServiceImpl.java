@@ -47,7 +47,7 @@ public class GamaServiceImpl implements GamaService {
                 Gama elemento = optionalElemento.get();
                 elemento.setNombre(gama.getNombre());
                 elemento.setDescripcion(gama.getDescripcion());
-                elemento.setPrecio(gama.getPrecio());
+                //elemento.setPrecio(gama.getPrecio());
 
                 gamaRepository.save(elemento);
             } else {
