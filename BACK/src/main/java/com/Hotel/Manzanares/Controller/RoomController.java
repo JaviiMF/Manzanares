@@ -27,6 +27,11 @@ public class RoomController {
     @PostMapping("/disponibles")
     public List<Habitacion> getHabitacionesDisponibles(@RequestBody DispRequest dispRequest) {return roomService.getHabitacionesDisponibles(dispRequest); }
 
+    @PutMapping("/updateHabitacion/{id}")
+    public void updateHabitacion(@PathVariable Long id,@RequestBody Habitacion habitacion){
+        habitacionService.updateHabitacion(id,habitacion);
+    }
+
     @GetMapping("/all")
     public List<Habitacion> getAllHabitaciones(){
         return roomService.getAllHabitaciones();
