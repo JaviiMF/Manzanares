@@ -8,6 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/Recepcionista/Estilos.css';
 import { ListaServicios } from './components/Recepcionista/ListaServicios';
 import { Clientes } from './components/Recepcionista/Clientes';
+import { Usuarios } from './components/Webmaster/Usuarios';
+import { Habitaciones } from './components/Webmaster/Habitaciones';
+import { Ofertas } from './components/Webmaster/Ofertas';
+import { ListaUsuario } from './components/Webmaster/ListaUsuario';
+import { ListaHabitacion } from './components/Webmaster/ListaHabitacion';
+import { ListaOferta } from './components/Webmaster/ListaOferta';
 import { ListaCliente } from './components/Recepcionista/ListaCliente';
 import { EditaCliente } from './components/Recepcionista/EditaCliente';
 import RoomAviable from './components/RoomAviable';
@@ -36,6 +42,12 @@ function App() {
             <Route path="/clientes" element={<ListaCliente/>}/>
             <Route path="/servicios" element={<ListaServicios/>}/>
             <Route path="/clientes/editar/:dniAux" element={<EditaCliente />} />
+            <Route path="/gestion-usuarios" element={<Usuarios/>}/>
+            <Route path="/usuarios" element={<ListaUsuario/>}/>
+            <Route path="/gestion-habitaciones" element={<Habitaciones/>} />
+            <Route path="/habitaciones" element={<ListaHabitacion/>}/>
+            <Route path="/gestion-ofertas" element={<Ofertas/>} />
+            <Route path="/ofertas" element={<ListaOferta  />} />
             <Route path="/room-aviable" element={<RoomAviable />} />
             <Route path="/CrearReserva" element={<CrearReserva/>}/>
             <Route path="/gestion-servicio" element={<CreaServicio/>}/>
