@@ -7,7 +7,7 @@ export function ListaHabitacion() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:8080/customer/all")
+        fetch("http://localhost:8080/room/all")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -23,13 +23,13 @@ export function ListaHabitacion() {
     }, []);
 
 
-    const handleDelete = (numero) => {
+    const handleDelete = (id) => {
         const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar esta habitación?");
         if (!confirmDelete) {
             return;     
         }
 
-        fetch(`http://localhost:8080/customer/deleteUsuario/${numero}`, {
+        fetch(`http://localhost:8080/customer/deleteHabitacion/${id}`, {
             method: 'DELETE'
         })
         .then(response => {
@@ -37,15 +37,15 @@ export function ListaHabitacion() {
                 throw new Error(`Error al borrar la habitación: ${response.statusText}`);
             }
             // Actualizamos el estado para reflejar los cambios en la UI
-            setHabitaciones(prevHabitaciones => prevHabitaciones.filter(habitacion => habitacion.numero !== numero));
+            setHabitaciones(prevHabitaciones => prevHabitaciones.filter(habitacion => habitacion.id !== id));
         })
         .catch(error => {
             setError(error.message);
         });
     };
 
-    const handleEdit = (dni) => {
-        navigate(`/clientes/editar/${dni}`); 
+    const handleEdit = (id) => {
+        navigate(`/habitaciones/editar/${id}`); 
     };
 
     return (
@@ -59,24 +59,28 @@ export function ListaHabitacion() {
                 <table className="cliente-table">
                     <thead>
                         <tr>
-                            <th>Número</th>
-                            <th>Disponibilidad</th>
-                            <th>Extras</th>
-                            <th>Disponibles</th>
+                            <th>m2</th>
+                            <th>num</th>
+                            <th>numcamas</th>
+                            <th>gama</th>
+                            <th>mascotas</th>
+                            <th>precio</th>
                         </tr>
                     </thead>
                     <tbody>
                         {habitaciones.map((habitacion, index) => (
                             <tr key={index}>
-                                <td>{habitacion.numero}</td>
-                                <td>{habitacion.disponibilidad}</td>
-                                <td>{habitacion.extras}</td>
-                                <td>{habitacion.disponibles}</td>
+                                <td>{habitacion.m2}</td>
+                                <td>{habitacion.num}</td>
+                                <td>{habitacion.numcamas}</td>
+                                <td>{habitacion.gama}</td>
+                                <td>{habitacion.mascotas}</td>
+                                <td>{habitacion.precio}</td>
                                 <td>
-                                    <button type="button" className="edit-button" onClick={() => handleEdit(habitacion.numero)}>
+                                    <button type="button" className="edit-button" onClick={() => handleEdit(habitacion.id)}>
                                         Editar
                                     </button>
-                                    <button type="button" className="delete-button" onClick={() => handleDelete(habitacion.numero)}>
+                                    <button type="button" className="delete-button" onClick={() => handleDelete(habitacion.id)}>
                                         Borrar
                                     </button>
                                 </td>

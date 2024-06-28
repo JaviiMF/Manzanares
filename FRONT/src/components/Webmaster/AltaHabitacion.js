@@ -2,40 +2,44 @@ import { useState } from "react";
 import axios from 'axios';
 
 export function AltaHabitacion() {
-    const [numero, setNumero] = useState('');
-    const [descripcion, setDescripcion] = useState('');
-    const [disponibilidad, setDisponibilidad] = useState('');
-    const [extras, setExtras] = useState('');
-    const [imagen, setImagen] = useState('');
-    const [disponibles, setDisponibles] = useState('');
+    const [m2, setM2] = useState('');
+    const [num, setNum] = useState('');
+    const [numcamas, setNumCamas] = useState('');
+    const [gama, setGama] = useState('media');
+    const [mascotas, setMascotas] = useState(true);
+    const [precio, setPrecio] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const data = {
-            numero,
-            descripcion,
-            disponibilidad,
-            extras,
-            imagen,
-            disponibles
+            m2,
+            num,
+            numcamas,
+            gama,
+            mascotas,
+            precio
         };
 
-        axios.post('http://localhost:8080/customer/createHabitacion', data)
+        axios.post('http://localhost:8080/room/createHabitacion', data)
             .then(response => {
                 alert('Habitación creada exitosamente');
                 // Limpiar formulario después de la creación exitosa
-                setNumero('');
-                setDescripcion('');
-                setDisponibilidad('');
-                setExtras('');
-                setDisponibles('');
-                setImagen('');
+                setM2('');
+                setNum('');
+                setNumCamas('');
+                setGama('');
+                setMascotas('');
+                setPrecio('');
             })
             .catch(error => {
                 console.error('Hubo un error al crear la habitación:', error);
                 alert('Error al crear la habitación');
             });
+    };
+
+    const handleMascotasChange = (e) => {
+        setMascotas(e.target.value === 'true');
     };
 
     return (
@@ -49,76 +53,74 @@ export function AltaHabitacion() {
                 <div className="wrapper">
                     <div className="izq">
                         <div className="form-group">
-                            <label htmlFor="nombre">Número </label>    
+                            <label htmlFor="m2">Metros cuadrados </label>    
                             <input 
                                 type="text" 
-                                name="numero" 
-                                id="numero" 
-                                value={numero} 
-                                onChange={(e) => setNumero(e.target.value)} 
-                            />
-                        </div>
-                    </div>               
-                </div>
-
-                <div className="form-group">
-                            <label htmlFor="descripcion">Descripcion </label>    
-                            <textarea id="descripcion" 
-                            rows="4" cols="60"
-                            name="descripcion" 
-                            maxLength={255}
-                            value={descripcion}
-                            onChange={(e) => setDescripcion(e.target.value)} ></textarea>
-                        </div>  
-
-                <div className="submit-group"></div>
-
-                <div className="wrapper">
-                    <div className="izq">
-                        <div className="form-group">
-                            <label htmlFor="disponibilidad">Disponibilidad </label>    
-                            <input 
-                                type="text" 
-                                name="disponibilidad" 
-                                id="disponibilidad" 
-                                value={disponibilidad} 
-                                onChange={(e) => setDisponibilidad(e.target.value)} 
+                                name="m2" 
+                                id="m2" 
+                                value={m2} 
+                                onChange={(e) => setM2(e.target.value)} 
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="imagen">Imagen </label>    
+                            <label htmlFor="numcamas">Número de camas </label>    
                             <input 
-                                type="file" 
-                                accept="image/*,.pdf"
-                                name="imagen" 
-                                id="imagen" 
-                                value={imagen} 
-                                onChange={(e) => setImagen(e.target.value)} 
+                                type="text" 
+                                name="numcamas" 
+                                id="numcamas" 
+                                value={numcamas} 
+                                onChange={(e) => setNumCamas(e.target.value)} 
                             />
-                        </div> 
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="mascotas">Mascotas</label>    
+                                <select 
+                                    name="mascotas" 
+                                    id="mascotas" 
+                                    value={mascotas} 
+                                    onChange={handleMascotasChange}
+                                >
+                                    <option value="true">Sí</option>
+                                    <option value="false">No</option>
+                                </select>
+                        </div>
                     </div>
                     <div className="der">
                         <div className="form-group">
-                            <label htmlFor="extras">Extras </label>    
+                            <label htmlFor="num">Número de habitación </label>    
                             <input 
                                 type="text" 
-                                name="extras" 
-                                id="extras" 
-                                value={extras} 
-                                onChange={(e) => setExtras(e.target.value)} 
+                                name="num" 
+                                id="num" 
+                                value={num} 
+                                onChange={(e) => setNum(e.target.value)} 
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="disponibles">Disponibles de la habitación </label>    
+                            <label htmlFor="gama">Gama </label>    
+                            <select 
+                                name="gama" 
+                                id="gama" 
+                                value={gama} 
+                                onChange={(e) => setGama(e.target.value)} 
+                            >
+                                <option value="baja">Baja</option>
+                                <option value="media">Media</option>
+                                <option value="alta">Alta</option>
+                            </select>
+                        </div>     
+                        <div className="form-group">
+                            <label htmlFor="precio">Precio </label>    
                             <input 
                                 type="text" 
-                                name="disponibles" 
-                                id="disponibles" 
-                                value={disponibles} 
-                                onChange={(e) => setDisponibles(e.target.value)} 
+                                name="precio" 
+                                id="precio" 
+                                value={precio} 
+                                onChange={(e) => setPrecio(e.target.value)} 
                             />
-                        </div>
-                    </div>               
+                        </div> 
+                    </div>
+                                   
                 </div>
 
                 <div className="submit-group">

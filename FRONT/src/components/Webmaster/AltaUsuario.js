@@ -4,7 +4,7 @@ import axios from 'axios';
 export function AltaUsuario() {
     const [nombre, setNombre] = useState('');
     const [dni, setDni] = useState('');
-    const [contrasena, setContrasena] = useState('');
+    const [password, setPassword] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [pais, setPais] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -12,13 +12,13 @@ export function AltaUsuario() {
     const [confPassword, setConfPassword] = useState('');
     const [telefono, setTelefono] = useState('');
     const [genero, setGenero] = useState('masculino');
-    const [rol, setRol] = useState('cliente');
+    const [tipo, setTipo] = useState('tipo');
     const [error, setError] = useState('');
     const [direccion, setDireccion] = useState('');
 
     // Función para validar si las contraseñas coinciden
     const validatePasswords = () => {
-        return contrasena === confPassword;
+        return password === confPassword;
     };
 
     const handleSubmit = (event) => {
@@ -32,14 +32,14 @@ export function AltaUsuario() {
         const data = {
             nombre,
             dni,
-            contrasena,
+            password,
             fechaNacimiento,
             pais,
             apellidos,
             email,
             telefono,
             genero,
-            rol,
+            tipo,
             direccion
         };
 
@@ -49,7 +49,7 @@ export function AltaUsuario() {
                 // Limpiar formulario después de la creación exitosa
                 setNombre('');
                 setDni('');
-                setContrasena('');
+                setPassword('');
                 setFechaNacimiento('');
                 setPais('');
                 setApellidos('');
@@ -57,7 +57,7 @@ export function AltaUsuario() {
                 setConfPassword('');
                 setTelefono('');
                 setGenero('masculino');
-                setRol('cliente');
+                setTipo('cliente');
                 setDireccion('');
                 setError('');
             })
@@ -98,13 +98,13 @@ export function AltaUsuario() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="pass">Contraseña </label>    
+                            <label htmlFor="password">Contraseña </label>    
                             <input 
                                 type="password" 
-                                name="pass" 
-                                id="pass" 
-                                value={contrasena} 
-                                onChange={(e) => setContrasena(e.target.value)} 
+                                name="password" 
+                                id="password" 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} 
                             />
                         </div>
                         <div className="form-group">
@@ -194,19 +194,18 @@ export function AltaUsuario() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="rol">Rol </label>    
+                            <label htmlFor="tipo">Tipo </label>    
                             <select 
-                                name="rol" 
-                                id="rol" 
-                                value={rol} 
-                                onChange={(e) => setRol(e.target.value)} 
+                                name="tipo" 
+                                id="tipo" 
+                                value={tipo} 
+                                onChange={(e) => setTipo(e.target.value)} 
                             >
                                 <option value="cliente">Cliente</option>
                                 <option value="recepcionista">Recepcionista</option>
                                 <option value="webmaster">Webmaster</option>
                             </select>
                         </div>
-                        
                     </div>               
                 </div>
 

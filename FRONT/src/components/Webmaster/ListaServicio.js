@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function ListaOferta() {
-    const [ofertas, setOfertas] = useState([]);
+export function ListaServicio() {
+    const [servicios, setServicios] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:8080/customer/all")
+        fetch("http://localhost:8080/servicio/allServicios")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -15,7 +15,7 @@ export function ListaOferta() {
                 return response.json();
             })
             .then(data => {
-                setOfertas(data);
+                setServicios(data);
             })
             .catch(error => {
                 setError(error.message);
@@ -23,35 +23,35 @@ export function ListaOferta() {
     }, []);
 
 
-    const handleDelete = (nombre) => {
-        const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar esta oferta?");
+    const handleDelete = (id) => {
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este servicio?");
         if (!confirmDelete) {
             return;     
         }
 
-        fetch(`http://localhost:8080/customer/deleteUsuario/${nombre}`, {
+        fetch(`http://localhost:8080/servicio/deleteServicio/${id}`, {
             method: 'DELETE'
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Error al borrar la habitación: ${response.statusText}`);
+                throw new Error(`Error al borrar el servicio: ${response.statusText}`);
             }
             // Actualizamos el estado para reflejar los cambios en la UI
-            setOfertas(prevOfertas => prevOfertas.filter(oferta => oferta.nombre !== nombre));
+            setServicios(prevServicios => prevServicios.filter(servicio => servicio.id !== id));
         })
         .catch(error => {
             setError(error.message);
         });
     };
 
-    const handleEdit = (nombre) => {
-        navigate(`/clientes/editar/${nombre}`); 
+    const handleEdit = (id) => {
+        navigate(`/servicios/editar/${id}`); 
     };
 
     return (
         <div >
-            <h3 className="list-title">Listado de Ofertas</h3>
-            <h4 className="list-description">En esta página puedes acceder a todas las ofertas del Hotel.</h4>
+            <h3 className="list-title">Listado de Serviciosssss</h3>
+            <h4 className="list-description">En esta página puedes acceder a todos los servicios del Hotel.</h4>
 
             {error ? (
                 <p className="error-message">Error: {error}</p>
@@ -61,18 +61,20 @@ export function ListaOferta() {
                         <tr>
                             <th>Nombre</th>
                             <th>Precio</th>
+                            <th>Horario</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {ofertas.map((oferta, index) => (
+                        {servicios.map((servicio, index) => (
                             <tr key={index}>
-                                <td>{oferta.nombre}</td>
-                                <td>{oferta.precio}</td>
+                                <td>{servicio.nombre}</td>
+                                <td>{servicio.precio}</td>
+                                <td>{servicio.horario}</td>
                                 <td>
-                                    <button type="button" className="edit-button" onClick={() => handleEdit(oferta.nombre)}>
+                                    <button type="button" className="edit-button" onClick={() => handleEdit(servicio.id)}>
                                         Editar
                                     </button>
-                                    <button type="button" className="delete-button" onClick={() => handleDelete(oferta.nombre)}>
+                                    <button type="button" className="delete-button" onClick={() => handleDelete(servicio.id)}>
                                         Borrar
                                     </button>
                                 </td>
