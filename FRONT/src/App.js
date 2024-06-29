@@ -51,8 +51,6 @@ function App() {
             <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
           </Routes>
         </main>
-        <Footer />
-
       </div>
     </Router>
   );
