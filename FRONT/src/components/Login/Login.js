@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Login.css';
-import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -31,9 +30,11 @@ const Login = () => {
             if (response.status === 200) {
                 // Almacenar el ID del usuario en la memoria local
                 if (response.data !== "") {
-                    localStorage.setItem('userDni', response.data);
+                    localStorage.setItem('userDni', response.data.dni);
+                    localStorage.setItem('userTipo', response.data.tipo);
                     console.log('Usuario ingresó con éxito');
                     navigate("/");
+                    window.location.reload(); // Recarga la página para reflejar el logout
                 } else {
                     localStorage.setItem('userDni', null);
                     alert("Usuario no encontrado");
@@ -49,7 +50,6 @@ const Login = () => {
 
     return (
         <div>
-            <Navbar />
             <div className="login-container">
                 <h3 className="text-center">Inicia Sesión</h3>
                 <p className="text-center">Accede a un sinfín de opciones de viaje con una sola cuenta en Manzanares.com</p>

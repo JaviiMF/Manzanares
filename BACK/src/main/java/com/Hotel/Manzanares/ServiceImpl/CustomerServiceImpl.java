@@ -2,6 +2,7 @@ package com.Hotel.Manzanares.ServiceImpl;
 
 import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.LoginRequest;
+import com.Hotel.Manzanares.Response.LoginResponse;
 import com.Hotel.Manzanares.Service.CustomerService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -77,20 +78,21 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String loginUsuario(LoginRequest loginRequest) {
+    public LoginResponse loginUsuario(LoginRequest loginRequest) {
 
-        String dni = null;
+        LoginResponse loginResponse = new LoginResponse();
 
        try{
-           String dniUsuario = customerRepository.findByUsuarioAndPass(loginRequest.getUsuario(), loginRequest.getPass());
-           if(dniUsuario != null){
-               dni = dniUsuario;
+           Usuario usuario = customerRepository.findByUsuarioAndPass(loginRequest.getUsuario(), loginRequest.getPass());
+           if(usuario != null){
+               loginResponse.setDni(usuario.getDni());
+               loginResponse.setTipo(usuario.getTipo());
            }
        } catch (Exception e) {
            System.out.println("Error en el login" + e.getMessage());
        }
 
-        return dni;
+        return loginResponse;
     }
 
     @Override

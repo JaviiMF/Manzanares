@@ -2,6 +2,7 @@ package com.Hotel.Manzanares.Controller;
 
 import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.LoginRequest;
+import com.Hotel.Manzanares.Response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.Hotel.Manzanares.Service.CustomerService;
 
@@ -52,7 +53,7 @@ public class CustomerController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest){
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
         return customerService.loginUsuario(loginRequest);
     }
 }

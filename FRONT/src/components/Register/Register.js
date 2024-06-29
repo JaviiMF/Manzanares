@@ -50,7 +50,6 @@ const Register = () => {
 
     return (
         <div>
-            <Navbar />
             <div className="register-container">
                 <h3 className="text-center">Regístrate</h3>
                 <p className="text-center">Crea una cuenta en Manzanares.com</p>

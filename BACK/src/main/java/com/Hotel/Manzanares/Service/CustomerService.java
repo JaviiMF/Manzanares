@@ -2,6 +2,7 @@ package com.Hotel.Manzanares.Service;
 
 import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.LoginRequest;
+import com.Hotel.Manzanares.Response.LoginResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface CustomerService {
 
     void updateUsuario(String dni, Usuario usuario);
 
-    String loginUsuario(LoginRequest loginRequest);
+    LoginResponse loginUsuario(LoginRequest loginRequest);
 
     List<Usuario> getAllUsuarios();
 }

@@ -1,0 +1,46 @@
+/* src/App.css */
+.App {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin-top: 1550px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.forecast-container {
+    max-height: 400px; /* Ajusta esta altura según tus necesidades */
+    width: 800px; /* Ajusta esta altura según tus necesidades */
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 60px;
+    margin-left: 280px;
+}
+
+.forecast-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.forecast-item {
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.forecast-item:last-child {
+    border-bottom: none;
+}
+
+.forecast-item label {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad del texto */
+    padding: 10px;
+    border-radius: 5px;
+}
