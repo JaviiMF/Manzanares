@@ -57,6 +57,29 @@ public class RoomServiceImpl implements RoomService {
         }
     }
 
+    /*@Override
+    public void updateHabitacion(String dni, Habitacion habitacion) {
+        try {
+            Usuario elemento = customerRepository.findByDni(dni);
+
+            if(elemento != null){
+                elemento.setActivo(usuario.getActivo());
+                elemento.setDireccion(usuario.getDireccion());
+                elemento.setDni(usuario.getDni());
+                elemento.setHorario(usuario.getHorario());
+                elemento.setEmail(usuario.getEmail());
+                elemento.setPassword(usuario.getPassword());
+                elemento.setTipo(usuario.getTipo());
+                elemento.setNombre(usuario.getNombre());
+                elemento.setTelefono(usuario.getTelefono());
+
+                customerRepository.save(elemento);
+            }
+        } catch (Exception e){
+            System.out.println("Error al modificar usuario" + e.getMessage());
+        }
+    }*/
+
     @Override
     public List<Habitacion> getAllHabitaciones() {
         return roomRepository.findAll();

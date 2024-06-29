@@ -32,5 +32,14 @@ public class RoomController {
     @GetMapping("/{id}")
     public Optional<Habitacion> getRoom(@PathVariable Long id){
         return roomService.getRoom(id);
+        
+    @PutMapping("/updateHabitacion/{id}")
+    public void updateHabitacion(@PathVariable Long id,@RequestBody Habitacion habitacion){
+        habitacionService.updateHabitacion(id,habitacion);
+    }
+
+    @GetMapping("/all")
+    public List<Habitacion> getAllHabitaciones(){
+        return roomService.getAllHabitaciones();
     }
 }
