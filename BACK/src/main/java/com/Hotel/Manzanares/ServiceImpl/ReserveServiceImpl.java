@@ -228,4 +228,9 @@ public class ReserveServiceImpl implements ReserveService {
 
         return respuesta;
     }
+
+    @Override
+    public int darBajaReserva(Long id){
+        return reserveRepository.cancelById(id);
+    }
 }

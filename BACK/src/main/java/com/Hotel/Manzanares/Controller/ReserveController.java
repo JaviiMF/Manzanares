@@ -50,4 +50,8 @@ public class ReserveController {
         return reserveService.getReserva(id);
     }
 
+    @GetMapping("/baja/{id}")
+    public int darBajaReserva(@PathVariable Long id){
+        return reserveService.darBajaReserva(id);
+    }
 }

@@ -1,7 +1,9 @@
 package com.Hotel.Manzanares.Repository;
 
 import com.Hotel.Manzanares.Entity.Reserva;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,9 @@ public interface ReserveRepository extends JpaRepository<Reserva,Long> {
             "AND a.fecha_checkout >= CAST(:fechaInicio AS TIMESTAMP)) " +
             "OR a.id_habitacion IS NULL", nativeQuery = true)
     Collection<Long> getHabitacionesSiNoReservadas(@Param("fechaInicio") String fechaInicio, @Param("fechaFin") String fechaFin);
+
+    @Modifying
+    @Transactional
+    @Query("update Reserva c set c.activa = false where c.id =:id")
+    public int cancelById(@Param("id") Long id);
 }

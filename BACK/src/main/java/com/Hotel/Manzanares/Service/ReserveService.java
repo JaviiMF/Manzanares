@@ -22,4 +22,6 @@ public interface ReserveService {
     Optional<Reserva> getReserva(Long id);
 
     String updateReserve(Long id, ReserveRequest reserveRequest);
+
+    int darBajaReserva(Long id);
 }
