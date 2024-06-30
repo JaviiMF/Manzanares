@@ -17,8 +17,14 @@ const CarouselComponent = () => {
     const navigate = useNavigate();
 
     const handleReserveClick = () => {
-        alert("Para realizar cualquier reserva debes estar registrado!");
-        navigate("/login");
+
+        const dni = localStorage.getItem('userDni');
+        if (dni) {
+            navigate("/CrearReserva");
+        } else {
+            alert("Para realizar cualquier reserva debes estar registrado!");
+            navigate("/login");
+        }
     };
 
 

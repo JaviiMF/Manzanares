@@ -45,7 +45,7 @@ function CrearReserva() {
 
   const verificarDni = async (dni) => {
     try {
-      const response = await axios.get(`http://localhost:8081/customer/find/${dni}`);
+      const response = await axios.get(`http://localhost:8080/customer/find/${dni}`);
       if (response.data) {
         setDniValido(true);
       } else {
@@ -65,7 +65,7 @@ function CrearReserva() {
 
   const fetchDescuentos = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/descuento/allDescuentos');
+      const response = await axios.get('http://localhost:8080/descuento/allDescuentos');
       setDescuentos(response.data);
     } catch (error) {
       console.error('Error fetching discounts', error);
@@ -74,7 +74,7 @@ function CrearReserva() {
 
   const fetchExtras = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/extras/allExtras');
+      const response = await axios.get('http://localhost:8080/extras/allExtras');
       setExtras(response.data);
     } catch (error) {
       console.error('Error fetching extras', error);
@@ -83,7 +83,7 @@ function CrearReserva() {
 
   const fetchServicios = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/servicio/allServicios');
+      const response = await axios.get('http://localhost:8080/servicio/allServicios');
       setServicios(response.data);
     } catch (error) {
       console.error('Error fetching servicios', error);
@@ -92,7 +92,7 @@ function CrearReserva() {
 
   const fetchHabitacionesDisponibles = async (fechaEntrada, fechaSalida) => {
     try {
-      const response = await axios.post('http://localhost:8081/room/disponibles', {
+      const response = await axios.post('http://localhost:8080/room/disponibles', {
         fechaInicio: fechaEntrada,
         fechaFin: fechaSalida,
       });
@@ -115,7 +115,7 @@ function CrearReserva() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8081/reserve/createReserve', {
+      const response = await axios.post('http://localhost:8080/reserve/createReserve', {
         dniCliente: dni,
         fechaInicio: fechaEntrada,
         fechaFin: fechaSalida,
@@ -245,9 +245,22 @@ function CrearReserva() {
       const descuentoAplicado = total * (descuentoSeleccionado.porcentaje / 100);
       total -= descuentoAplicado;
     }
-  
+    total = parseFloat(total.toFixed(2));
     setPrecioTotal(total);
   };
+
+  const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
+  //const [dniCliente, setdniCliente] = useState('');
+  const [hasTipo, sethasTipo] = useState(false);
+
+  useEffect(() => {
+    if (tipo === "cliente") {
+      sethasTipo(true);
+      setDni(localStorage.getItem('userDni'));
+    } else {
+      sethasTipo(false);
+    }
+  }, []);
 
   return (
     <div className="container">
@@ -257,27 +270,38 @@ function CrearReserva() {
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6">
-              <div className="form-group">
+              {!hasTipo && (<div className="form-group">
                 <label>DNI del Cliente:</label>
                 <input
-                  type="text"
-                  className={`form-control ${!dniValido ? 'is-invalid' : ''}`}
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
-                  required
+                    type="text"
+                    className={`form-control ${!dniValido ? 'is-invalid' : ''}`}
+                    value={dni}
+                    onChange={(e) => setDni(e.target.value)}
+                    required
                 />
                 {!dniValido && <small className="text-danger">El DNI no existe.</small>}
-              </div>
+              </div>)}
+              {hasTipo && ( <div className="form-group">
+                <label>DNI del Cliente:</label>
+                <input
+                    type="text"
+                    className={`form-control ${!dniValido ? 'is-invalid' : ''}`}
+                    value={dni}
+                    readOnly
+                    required
+                />
+                {!dniValido && <small className="text-danger">El DNI no existe.</small>}
+              </div>)}
             </div>
             <div className="col-md-3">
               <div className="form-group">
                 <label>Fecha Entrada:</label>
                 <input
-                  type="date"
-                  className="form-control"
-                  value={fechaEntrada}
-                  onChange={handleFechaEntradaChange}
-                  required
+                    type="date"
+                    className="form-control"
+                    value={fechaEntrada}
+                    onChange={handleFechaEntradaChange}
+                    required
                 />
               </div>
             </div>
@@ -387,7 +411,6 @@ function CrearReserva() {
           <h4>Precio Total: ${precioTotal}</h4>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

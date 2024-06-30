@@ -7,6 +7,7 @@ import com.Hotel.Manzanares.Repository.RoomRepository;
 import com.Hotel.Manzanares.Request.DispRequest;
 import com.Hotel.Manzanares.Service.RoomService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,8 +18,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
+    @Autowired
     private final RoomRepository roomRepository;
 
+    @Autowired
     private final ReserveRepository reserveRepository;
 
 

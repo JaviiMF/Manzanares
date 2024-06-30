@@ -9,6 +9,8 @@ import './Navbar.css';
 const Navbar = () => {
     const [hasDNI, setHasDNI] = useState(false);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const dni = localStorage.getItem('userDni');
         if (dni) {
@@ -21,7 +23,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('userDni');
         localStorage.removeItem('userTipo');
-        window.location.href = '/'; // Redirecciona a la página de inicio
+        navigate("/");
         window.location.reload(); // Recarga la página para reflejar el logout
     };
 

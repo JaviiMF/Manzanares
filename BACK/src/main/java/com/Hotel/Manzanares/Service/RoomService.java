@@ -17,7 +17,7 @@ public interface RoomService {
 
     void deleteRoom(Long id);
 
-    void updateRoom(String dni, Habitacion habitacion);
+    //void updateRoom(String dni, Habitacion habitacion);
 
     List<Habitacion> getAllHabitaciones();
 

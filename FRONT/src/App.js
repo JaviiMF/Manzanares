@@ -5,9 +5,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/Recepcionista/Estilos.css';
-import { ListaServicios } from './components/Recepcionista/ListaServicios';
-
-
 import { Clientes } from './components/Recepcionista/Clientes';
 import { Usuarios } from './components/Webmaster/Usuarios';
 import { Habitaciones } from './components/Webmaster/Habitaciones';
@@ -21,13 +18,8 @@ import RoomAviable from './components/RoomAviable';
 import CrearReserva from './components/Recepcionista/CrearReserva';
 import { EditaServicio } from './components/Webmaster/EditaServicio';
 import Navbar from './components/Navbar/Navbar';
-import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
 import Register  from './components/Register/Register';
-import Rutas from './Rutas';
-//import './components/Footer/Footer.css';
-//import './components/Navbar/Navbar.css';
-
 import ListaReserva from './components/Recepcionista/ListaReserva';
 import EditarReserva from './components/Recepcionista/EditarReserva';
 

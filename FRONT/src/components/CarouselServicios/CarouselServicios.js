@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './CarouselServicios.css'; // Puedes agregar estilos personalizados aquí
@@ -16,8 +16,14 @@ const CarouselComponent = () => {
     const navigate = useNavigate();
 
     const handleReserveClick = () => {
-        alert("Para contratar cualquier servicio debes estar registrado!");
-        navigate("/login");
+
+        const dni = localStorage.getItem('userDni');
+        if (dni) {
+            navigate("/CrearReserva");
+        } else {
+            alert("Para contratar cualquier servicio debes estar registrado!");
+            navigate("/login");
+        }
     };
 
     return (
