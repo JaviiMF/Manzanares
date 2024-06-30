@@ -70,6 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
                 elemento.setTipo(usuario.getTipo());
                 elemento.setNombre(usuario.getNombre());
                 elemento.setTelefono(usuario.getTelefono());
+                elemento.setFechaNacimiento(usuario.getFechaNacimiento());
 
                 customerRepository.save(elemento);
             }

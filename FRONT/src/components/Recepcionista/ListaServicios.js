@@ -51,7 +51,7 @@ export function ListaServicios() {
     };
 
     return (
-        <div>
+        <div className="list-container"> 
             <h3 className="list-title">Listado de Servicios</h3>
             <h4 className="list-description">Listado de los servicios disponibles.</h4>
 

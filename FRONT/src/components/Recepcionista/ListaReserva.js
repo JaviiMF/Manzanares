@@ -54,7 +54,7 @@ const ListarReservas = () => {
   };
 
   return (
-    <div className="container">
+    <div >
       <h2 className="text-center">Listado de Reservas</h2>
       <table className="table text-center">
         <thead>

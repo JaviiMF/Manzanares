@@ -3,6 +3,7 @@ package com.Hotel.Manzanares.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +28,7 @@ public class Usuario {
     private String horario;
     private Boolean activo;
     private String genero;
+    private Date fechaNacimiento;
 
 
     @Override
