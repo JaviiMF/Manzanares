@@ -49,7 +49,7 @@ export function ListaCliente() {
     };
 
     return (
-        <div >
+        <div className="list-container">
             <h3 className="list-title">Listado de Clientes</h3>
             <h4 className="list-description">En esta página puedes acceder a todos 
                 los datos sobre los usuarios, incluyendo sus reservas.</h4>

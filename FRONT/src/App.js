@@ -20,7 +20,6 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
 import Register  from './components/Register/Register';
-import Rutas from './Rutas';
 //import './components/Footer/Footer.css';
 //import './components/Navbar/Navbar.css';
 
@@ -35,7 +34,6 @@ function App() {
         <Navbar />
         <main className="content">
           <Routes>
-
             <Route path="/" element={<Home />} /> 
             <Route path='/Login' element={<Login/>}/> 
             <Route path='/Register' element={<Register/>}/> 
@@ -51,7 +49,6 @@ function App() {
             <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
           </Routes>
         </main>
-        <Footer />
 
       </div>
     </Router>

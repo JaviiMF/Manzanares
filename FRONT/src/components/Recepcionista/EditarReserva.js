@@ -54,7 +54,7 @@ function CrearReserva() {
 
   const verificarDni = async (dni) => {
     try {
-      const response = await axios.get(`http://localhost:8081/customer/find/${dni}`);
+      const response = await axios.get(`http://localhost:8080/customer/find/${dni}`);
       if (response.data) {
         setDniValido(true);
       } else {
@@ -68,7 +68,7 @@ function CrearReserva() {
 
   const fetchDescuentos = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/descuento/allDescuentos');
+      const response = await axios.get('http://localhost:8080/descuento/allDescuentos');
       setDescuentos(response.data);
     } catch (error) {
       console.error('Error fetching discounts', error);
@@ -77,7 +77,7 @@ function CrearReserva() {
 
   const fetchExtras = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/extras/allExtras');
+      const response = await axios.get('http://localhost:8080/extras/allExtras');
       setExtras(response.data);
     } catch (error) {
       console.error('Error fetching extras', error);
@@ -86,7 +86,7 @@ function CrearReserva() {
 
   const fetchServicios = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/servicio/allServicios');
+      const response = await axios.get('http://localhost:8080/servicio/allServicios');
       setServicios(response.data);
     } catch (error) {
       console.error('Error fetching servicios', error);
@@ -95,7 +95,7 @@ function CrearReserva() {
 
   const fetchHabitacionesDisponibles = async (fechaEntrada, fechaSalida) => {
     try {
-      const response = await axios.post('http://localhost:8081/room/disponibles', {
+      const response = await axios.post('http://localhost:8080/room/disponibles', {
         fechaInicio: fechaEntrada,
         fechaFin: fechaSalida,
       });
@@ -118,7 +118,7 @@ function CrearReserva() {
     setError('');
 
     try {
-      const response = await axios.put(`http://localhost:8081/reserve/updateReserve/${idReserva}`, {
+      const response = await axios.put(`http://localhost:8080/reserve/updateReserve/${idReserva}`, {
         dniCliente: dni,
         fechaInicio: fechaEntrada,
         fechaFin: fechaSalida,
@@ -257,7 +257,7 @@ function CrearReserva() {
 
   const cargarReservas = async () => {
     try {
-      const response = await axios.get(`http://localhost:8081/reserve/get/${idReserva}`);
+      const response = await axios.get(`http://localhost:8080/reserve/get/${idReserva}`);
       console.log(response.data);
   
       // Convertir el response.data en un array si no lo es
@@ -274,7 +274,7 @@ function CrearReserva() {
   
   const obtenerNumeroHabitacion = async (idHabitacion) => {
     try {
-      const response = await axios.get(`http://localhost:8081/room/${idHabitacion}`);
+      const response = await axios.get(`http://localhost:8080/room/${idHabitacion}`);
       console.log(response.data.num);
       return response.data.num;
     } catch (error) {
@@ -286,7 +286,7 @@ function CrearReserva() {
 
   const handleActivarDesactivarReserva = async (idReserva) => {
     try {
-      await axios.put(`http://localhost:8081/reserve/${idReserva}/activate`, { activa: true });
+      await axios.put(`http://localhost:8080/reserve/${idReserva}/activate`, { activa: true });
       
     } catch (error) {
       console.error('Error activando/desactivando reserva:', error);

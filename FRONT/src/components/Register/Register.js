@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Register.css';
+//import './Register.css';
 import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div >
             <Navbar />
             <div className="register-container">
                 <h3 className="text-center">Regístrate</h3>
@@ -161,23 +161,23 @@ const Register = () => {
                             <option value="otros">Otros</option>
                         </select>
                     </div>
-                    <div className="container">
+                    <div className="container-check">
                         <input
                             type="checkbox"
-                            id="terms"
+                            id="terms1"
                             required
                         />
-                        <label htmlFor="terms">
+                        <label htmlFor="terms1">
                             Acepto los <a href="#">términos y condiciones</a>
                         </label>
                     </div>
-                    <div className="container">
+                    <div className="container-check">
                         <input
                             type="checkbox"
-                            id="terms"
+                            id="terms2"
                             required
                         />
-                        <label htmlFor="terms">
+                        <label htmlFor="terms2">
                             Acepto la <a href="#">política de privacidad</a>
                         </label>
                     </div>
