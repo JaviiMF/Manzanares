@@ -28,7 +28,6 @@ public class Usuario {
     private String horario;
     private Boolean activo;
     private String genero;
-    private Date fechaNacimiento;
 
 
     @Override
