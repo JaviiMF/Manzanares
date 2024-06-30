@@ -12,10 +12,10 @@ body {
 }
 
 .register-container {
-    max-width: 800px;
+    max-width: 600px;
     width: 100%;
     margin: 20px;
-    margin-top: 350px;
+    margin-top: 200px;
     padding: 20px;
     background: white;
     border-radius: 10px;
@@ -85,18 +85,4 @@ body {
 
 .register-container .form-group.text-center a:hover {
     text-decoration: underline;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-
-.container input[type="checkbox"] {
-    margin-right: 0px;
-}
-
-.container label {
-    margin: 0;
 }

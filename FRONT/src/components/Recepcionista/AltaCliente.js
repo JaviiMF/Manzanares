@@ -80,6 +80,7 @@ export function AltaCliente() {
                                 type="text" 
                                 name="nombre" 
                                 id="nombre" 
+                                className="form-control"
                                 value={nombre} 
                                 onChange={(e) => setNombre(e.target.value)} 
                             />
@@ -115,29 +116,16 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="pais">País </label>    
+                            <label htmlFor="direccion">Direccion </label>    
                             <input 
                                 type="text" 
-                                name="pais" 
-                                id="pais" 
-                                value={pais} 
-                                onChange={(e) => setPais(e.target.value)} 
+                                name="direccion" 
+                                id="direccion" 
+                                value={direccion} 
+                                onChange={(e) => setDireccion(e.target.value)} 
                             />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="genero">Genero </label>    
-                            <select 
-                                name="genero" 
-                                id="genero" 
-                                value={genero} 
-                                onChange={(e) => setGenero(e.target.value)} 
-                            >
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                                <option value="otro">Otro</option>
-                                <option value="no_decir">Prefiero no decirlo</option>
-                            </select>
-                        </div>
+                        
                     </div>
                     <div className="der">
                         <div className="form-group">
@@ -181,15 +169,20 @@ export function AltaCliente() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="direccion">Direccion </label>    
-                            <input 
-                                type="text" 
-                                name="direccion" 
-                                id="direccion" 
-                                value={direccion} 
-                                onChange={(e) => setDireccion(e.target.value)} 
-                            />
+                            <label htmlFor="genero">Genero </label>    
+                            <select 
+                                name="genero" 
+                                id="genero" 
+                                value={genero} 
+                                onChange={(e) => setGenero(e.target.value)} 
+                            >
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="otro">Otro</option>
+                                <option value="no_decir">Prefiero no decirlo</option>
+                            </select>
                         </div>
+
                         
                     </div>               
                 </div>

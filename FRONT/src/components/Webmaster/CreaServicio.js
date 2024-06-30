@@ -90,19 +90,7 @@ export function CreaServicio() {
                                 value={hor1} 
                                 onChange={(e) => setHor1(e.target.value)} 
                             />
-                        </div>                
-                        <div className="form-group">
-                            <label htmlFor="imagen">Imagen </label>    
-                            <input 
-                                type="file" 
-                                accept="image/*,.pdf"
-                                name="imagen" 
-                                id="imagen" 
-                                value={imagen} 
-                                onChange={(e) => setImagen(e.target.value)} 
-                            />
-                        </div>                                                   
-                                            
+                        </div>                                                                                                       
                     </div>
                     <div className="der">
                         <div className="form-group">

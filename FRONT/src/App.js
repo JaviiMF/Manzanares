@@ -20,6 +20,9 @@ import { EditaServicio } from './components/Webmaster/EditaServicio';
 import Navbar from './components/Navbar/Navbar';
 import Login from './components/Login/Login';
 import Register  from './components/Register/Register';
+//import './components/Footer/Footer.css';
+//import './components/Navbar/Navbar.css';
+
 import ListaReserva from './components/Recepcionista/ListaReserva';
 import EditarReserva from './components/Recepcionista/EditarReserva';
 
@@ -31,7 +34,6 @@ function App() {
         <Navbar />
         <main className="content">
           <Routes>
-
             <Route path="/" element={<Home />} /> 
             <Route path='/Login' element={<Login/>}/> 
             <Route path='/Register' element={<Register/>}/> 

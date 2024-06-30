@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 
 export function BuscaCliente() {
     const [dni, setDni] = useState("");
@@ -35,7 +36,9 @@ export function BuscaCliente() {
                 <h4 className="form-description">Introduzca el DNI para comprobarlo</h4>
                 
                 <div className="form-group">
-                    <label htmlFor="dni">DNI</label>
+                    <div>
+                        <label htmlFor="dni">DNI</label>
+                    </div>                   
                     <input 
                         type="text" 
                         id="dni" 
