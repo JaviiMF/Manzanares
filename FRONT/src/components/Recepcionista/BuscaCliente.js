@@ -29,7 +29,7 @@ export function BuscaCliente() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container" style={{marginTop:"580px"}}>
             <form onSubmit={handleSubmit}>
                 <h3 className="form-title">¿Existe el Cliente?</h3>
                 <h4 className="form-description">Introduzca el DNI para comprobarlo</h4>

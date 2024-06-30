@@ -22,6 +22,7 @@ import Login from './components/Login/Login';
 import Register  from './components/Register/Register';
 import ListaReserva from './components/Recepcionista/ListaReserva';
 import EditarReserva from './components/Recepcionista/EditarReserva';
+import Perfil from './components/Perfil/Perfil';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
             <Route path="/servicios/editar/:idAux" element={<EditaServicio />} />
             <Route path="/ListaReserva" element={<ListaReserva />} />
             <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
+            <Route path="/Perfil" element={<Perfil />} />
           </Routes>
         </main>
       </div>

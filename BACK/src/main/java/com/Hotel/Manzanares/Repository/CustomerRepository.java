@@ -1,6 +1,8 @@
 package com.Hotel.Manzanares.Repository;
 
+import com.Hotel.Manzanares.Entity.Reserva;
 import com.Hotel.Manzanares.Entity.Usuario;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +22,17 @@ public interface CustomerRepository extends JpaRepository<Usuario, Long> {
 
     @Query("select u from Usuario u where u.email=:usuario and u.password=:pass")
     Usuario findByUsuarioAndPass(@Param("usuario") String usuario, @Param("pass") String pass);
+
+    @Modifying
+    @Transactional
+    @Query("update Usuario c set c.activo = false where c.dni =:dni")
+    public int bajaByDni(@Param("dni") String dni);
+
+    @Modifying
+    @Transactional
+    @Query("update Usuario c set c.activo = true where c.dni =:dni")
+    public int altaByDni(@Param("dni") String dni);
+
+    @Query("select r from Reserva r inner join Usuario u on u.dni = r.dniCliente where u.dni = :dni")
+    public List<Reserva> findByCliente(@Param("dni") String dni);
 }

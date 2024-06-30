@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function ListaHabitacion() {
@@ -29,27 +29,45 @@ export function ListaHabitacion() {
             return;     
         }
 
-        fetch(`http://localhost:8080/customer/deleteHabitacion/${id}`, {
+        fetch(`http://localhost:8080/room/deleteHabitacion/${id}`, {
             method: 'DELETE'
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error al borrar la habitación: ${response.statusText}`);
             }
-            // Actualizamos el estado para reflejar los cambios en la UI
-            setHabitaciones(prevHabitaciones => prevHabitaciones.filter(habitacion => habitacion.id !== id));
         })
         .catch(error => {
             setError(error.message);
         });
+
+        window.location.reload();
     };
 
-    const handleEdit = (id) => {
-        navigate(`/habitaciones/editar/${id}`); 
+    const handleEnable = (id) => {
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas habilitar esta habitación?");
+        if (!confirmDelete) {
+            return;
+        }
+
+        fetch(`http://localhost:8080/room/enableHabitacion/${id}`, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al habilitar la habitación: ${response.statusText}`);
+                }
+            })
+            .catch(error => {
+                setError(error.message);
+            });
+
+        window.location.reload();
     };
+
 
     return (
-        <div >
+        <div style={{marginTop:"500px"}}>
             <h3 className="list-title">Listado de Habitaciones</h3>
             <h4 className="list-description">En esta página puedes acceder a todas las habitaciones, incluyendo si han sido reservadas o no.</h4>
 
@@ -58,31 +76,35 @@ export function ListaHabitacion() {
             ) : (
                 <table className="cliente-table">
                     <thead>
-                        <tr>
-                            <th>m2</th>
-                            <th>num</th>
-                            <th>numcamas</th>
-                            <th>gama</th>
-                            <th>mascotas</th>
-                            <th>precio</th>
-                        </tr>
+                    <tr>
+                        <th>Num. Habitación</th>
+                        <th>M2</th>
+                        <th>Num. Camas</th>
+                        <th>Gama</th>
+                        <th>¿Mascotas?</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
                     </thead>
                     <tbody>
                         {habitaciones.map((habitacion, index) => (
                             <tr key={index}>
-                                <td>{habitacion.m2}</td>
                                 <td>{habitacion.num}</td>
+                                <td>{habitacion.m2}</td>
                                 <td>{habitacion.numcamas}</td>
                                 <td>{habitacion.gama}</td>
-                                <td>{habitacion.mascotas}</td>
+                                <td>{habitacion.mascotas ? "Si" : "No"}</td>
                                 <td>{habitacion.precio}</td>
                                 <td>
-                                    <button type="button" className="edit-button" onClick={() => handleEdit(habitacion.id)}>
-                                        Editar
-                                    </button>
-                                    <button type="button" className="delete-button" onClick={() => handleDelete(habitacion.id)}>
-                                        Borrar
-                                    </button>
+                                    {habitacion.activa && (
+                                        <button type="button" className="delete-button"
+                                                onClick={() => handleDelete(habitacion.id)}>
+                                            Deshabilitar
+                                        </button>
+                                    )}
+                                    {!habitacion.activa && (
+                                        <button type="button"  className="btn btn-success btn-block" onClick={() => handleEnable(habitacion.id)}>Habilitar</button>
+                                    )}
                                 </td>
                             </tr>
                         ))}

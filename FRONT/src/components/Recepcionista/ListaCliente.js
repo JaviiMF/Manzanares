@@ -49,7 +49,7 @@ export function ListaCliente() {
     };
 
     return (
-        <div >
+        <div style={{marginTop:"300px"}}>
             <h3 className="list-title">Listado de Clientes</h3>
             <h4 className="list-description">En esta página puedes acceder a todos 
                 los datos sobre los usuarios, incluyendo sus reservas.</h4>
@@ -59,27 +59,32 @@ export function ListaCliente() {
             ) : (
                 <table className="cliente-table">
                     <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Email</th>
-                            <th>DNI</th>
-                            <th>Teléfono</th>
-                        </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>DNI</th>
+                        <th>Teléfono</th>
+                        <th>Tipo</th>
+                        <th>Acción</th>
+                    </tr>
                     </thead>
                     <tbody>
                         {clientes.map((cliente, index) => (
                             <tr key={index}>
                                 <td>{cliente.nombre}</td>
-                                <td>{cliente.apellidos}</td>
+                                <td>{cliente.apellido}</td>
                                 <td>{cliente.email}</td>
                                 <td>{cliente.dni}</td>
                                 <td>{cliente.telefono}</td>
+                                <td>{cliente.tipo}</td>
                                 <td>
-                                    <button type="button" className="edit-button" onClick={() => handleEdit(cliente.dni)}>
+                                    <button type="button" className="edit-button"
+                                            onClick={() => handleEdit(cliente.dni)}>
                                         Editar
                                     </button>
-                                    <button type="button" className="delete-button" onClick={() => handleDelete(cliente.dni)}>
+                                    <button type="button" className="delete-button"
+                                            onClick={() => handleDelete(cliente.dni)}>
                                         Borrar
                                     </button>
                                 </td>

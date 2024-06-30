@@ -52,8 +52,7 @@ export function EditaServicio() {
             nombre,
             precio,
             descripcion,
-            horario,
-            imagen
+            horario
         };
 
         if (comparaHor()) {
@@ -111,18 +110,7 @@ export function EditaServicio() {
                                 value={hor1} 
                                 onChange={(e) => setHor1(e.target.value)} 
                             />
-                        </div>                
-                        <div className="form-group">
-                            <label htmlFor="imagen">Imagen </label>    
-                            <input 
-                                type="file" 
-                                accept="image/*,.pdf"
-                                name="imagen" 
-                                id="imagen" 
-                                value={imagen} 
-                                onChange={(e) => setImagen(e.target.value)} 
-                            />
-                        </div>                                                   
+                        </div>
                                             
                     </div>
                     <div className="der">
@@ -154,7 +142,7 @@ export function EditaServicio() {
                 </div>
 
                 <div className="form-group">
-                            <label htmlFor="descripcion">Descripcion </label>    
+                            <label htmlFor="descripcion" style={{marginLeft:"40px"}}>Descripcion </label>
                             <textarea id="descripcion" 
                             rows="4" cols="60"
                             name="descripcion" 

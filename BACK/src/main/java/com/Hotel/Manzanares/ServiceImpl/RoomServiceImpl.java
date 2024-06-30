@@ -90,4 +90,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Optional<Habitacion> getRoom(Long id){return roomRepository.findById(id);}
+
+    @Override
+    public int enableRoom(Long id) {
+        return roomRepository.enableById(id);
+    }
 }

@@ -31,8 +31,7 @@ export function CreaServicio() {
             nombre,
             precio,
             descripcion,
-            horario,
-            imagen
+            horario
         };
 
         if (comparaHor()) {
@@ -61,7 +60,7 @@ export function CreaServicio() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container" style={{marginTop:"200px"}}>
             <form onSubmit={handleSubmit}>
                 <h3 className="form-title">Crear Servicios</h3>
                 <h4 className="form-description">En esta página se crean los servicios del Hotel</h4>
@@ -90,19 +89,7 @@ export function CreaServicio() {
                                 value={hor1} 
                                 onChange={(e) => setHor1(e.target.value)} 
                             />
-                        </div>                
-                        <div className="form-group">
-                            <label htmlFor="imagen">Imagen </label>    
-                            <input 
-                                type="file" 
-                                accept="image/*,.pdf"
-                                name="imagen" 
-                                id="imagen" 
-                                value={imagen} 
-                                onChange={(e) => setImagen(e.target.value)} 
-                            />
-                        </div>                                                   
-                                            
+                        </div>
                     </div>
                     <div className="der">
                         <div className="form-group">
@@ -132,7 +119,7 @@ export function CreaServicio() {
                                
                 </div>
 
-                <div className="form-group">
+                <div className="form-group mt-4">
                             <label htmlFor="descripcion">Descripcion </label>    
                             <textarea id="descripcion" 
                             rows="4" cols="60"

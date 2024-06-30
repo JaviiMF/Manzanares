@@ -23,4 +23,5 @@ public interface RoomService {
 
     Optional<Habitacion> getRoom(Long id);
 
+    int enableRoom(Long id);
 }

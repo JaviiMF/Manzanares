@@ -301,6 +301,7 @@ function CrearReserva() {
                     className="form-control"
                     value={fechaEntrada}
                     onChange={handleFechaEntradaChange}
+                    min={new Date().toISOString().split("T")[0]}
                     required
                 />
               </div>
@@ -313,6 +314,7 @@ function CrearReserva() {
                   className="form-control"
                   value={fechaSalida}
                   onChange={handleFechaSalidaChange}
+                  min={new Date().toISOString().split("T")[0]}
                   required
                 />
               </div>

@@ -1,5 +1,6 @@
 package com.Hotel.Manzanares.ServiceImpl;
 
+import com.Hotel.Manzanares.Entity.Reserva;
 import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.LoginRequest;
 import com.Hotel.Manzanares.Response.LoginResponse;
@@ -98,5 +99,20 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Usuario> getAllUsuarios() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public int altaUsuario(String dni){
+        return customerRepository.altaByDni(dni);
+    }
+
+    @Override
+    public int bajaUsuario(String dni){
+        return customerRepository.bajaByDni(dni);
+    }
+
+    @Override
+    public List<Reserva> getAllReservas(String dni){
+        return customerRepository.findByCliente(dni);
     }
 }

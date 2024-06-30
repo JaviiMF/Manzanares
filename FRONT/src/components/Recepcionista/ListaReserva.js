@@ -13,7 +13,7 @@ const ListarReservas = () => {
 
   const cargarReservas = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/reserve/activeReserve');
+      const response = await axios.get('http://localhost:8080/reserve/activeReserve');
       console.log(response.data);
       setReservas(response.data);
 
@@ -27,7 +27,7 @@ const ListarReservas = () => {
 
   const handleActivarDesactivarReserva = async (idReserva, isActive) => {
     try {
-      await axios.put(`http://localhost:8081/reserve/${idReserva}/activate`, { activa: isActive });
+      await axios.put(`http://localhost:8080/reserve/${idReserva}/activate`, { activa: isActive });
       cargarReservas();
     } catch (error) {
       console.error('Error activando/desactivando reserva:', error);
@@ -36,7 +36,7 @@ const ListarReservas = () => {
 
   const obtenerNumeroHabitacion = async (idHabitacion) => {
     try {
-      const response = await axios.get(`http://localhost:8081/room/${idHabitacion}`);
+      const response = await axios.get(`http://localhost:8080/room/${idHabitacion}`);
       return response.data.num;
     } catch (error) {
       console.error(`Error obteniendo número de habitación para ID ${idHabitacion}:`, error);

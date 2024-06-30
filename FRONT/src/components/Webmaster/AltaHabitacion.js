@@ -2,12 +2,13 @@ import { useState } from "react";
 import axios from 'axios';
 
 export function AltaHabitacion() {
-    const [m2, setM2] = useState('');
-    const [num, setNum] = useState('');
-    const [numcamas, setNumCamas] = useState('');
-    const [gama, setGama] = useState('media');
+    const [m2, setM2] = useState();
+    const [num, setNum] = useState();
+    const [numcamas, setNumCamas] = useState();
+    const [gama, setGama] = useState();
     const [mascotas, setMascotas] = useState(true);
-    const [precio, setPrecio] = useState('');
+    const [precio, setPrecio] = useState();
+    const [activa, setActiva] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,7 +19,8 @@ export function AltaHabitacion() {
             numcamas,
             gama,
             mascotas,
-            precio
+            precio,
+            activa:true
         };
 
         axios.post('http://localhost:8080/room/createHabitacion', data)
@@ -55,7 +57,7 @@ export function AltaHabitacion() {
                         <div className="form-group">
                             <label htmlFor="m2">Metros cuadrados </label>    
                             <input 
-                                type="text" 
+                                type="number"
                                 name="m2" 
                                 id="m2" 
                                 value={m2} 
@@ -65,7 +67,7 @@ export function AltaHabitacion() {
                         <div className="form-group">
                             <label htmlFor="numcamas">Número de camas </label>    
                             <input 
-                                type="text" 
+                                type="number"
                                 name="numcamas" 
                                 id="numcamas" 
                                 value={numcamas} 
@@ -89,7 +91,7 @@ export function AltaHabitacion() {
                         <div className="form-group">
                             <label htmlFor="num">Número de habitación </label>    
                             <input 
-                                type="text" 
+                                type="number"
                                 name="num" 
                                 id="num" 
                                 value={num} 
@@ -98,21 +100,21 @@ export function AltaHabitacion() {
                         </div>
                         <div className="form-group">
                             <label htmlFor="gama">Gama </label>    
-                            <select 
-                                name="gama" 
+                            <select
+                                name="gama"
                                 id="gama" 
                                 value={gama} 
                                 onChange={(e) => setGama(e.target.value)} 
                             >
-                                <option value="baja">Baja</option>
-                                <option value="media">Media</option>
-                                <option value="alta">Alta</option>
+                                <option value="1">Baja</option>
+                                <option value="2">Media</option>
+                                <option value="3">Alta</option>
                             </select>
                         </div>     
                         <div className="form-group">
                             <label htmlFor="precio">Precio </label>    
                             <input 
-                                type="text" 
+                                type="number"
                                 name="precio" 
                                 id="precio" 
                                 value={precio} 
@@ -120,7 +122,6 @@ export function AltaHabitacion() {
                             />
                         </div> 
                     </div>
-                                   
                 </div>
 
                 <div className="submit-group">

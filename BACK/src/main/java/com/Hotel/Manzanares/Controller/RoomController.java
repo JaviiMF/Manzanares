@@ -27,6 +27,9 @@ public class RoomController {
     @DeleteMapping("/deleteHabitacion/{id}")
     public void deleteHabitacion(@PathVariable Long id) { roomService.deleteRoom(id); }
 
+    @GetMapping("/enableHabitacion/{id}")
+    public int enableHabitacion(@PathVariable Long id) { return roomService.enableRoom(id); }
+
     @PostMapping("/disponibles")
     public List<Habitacion> getHabitacionesDisponibles(@RequestBody DispRequest dispRequest) {return roomService.getHabitacionesDisponibles(dispRequest); }
 

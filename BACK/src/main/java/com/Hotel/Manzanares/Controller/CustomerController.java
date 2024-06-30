@@ -1,5 +1,6 @@
 package com.Hotel.Manzanares.Controller;
 
+import com.Hotel.Manzanares.Entity.Reserva;
 import com.Hotel.Manzanares.Entity.Usuario;
 import com.Hotel.Manzanares.Request.LoginRequest;
 import com.Hotel.Manzanares.Response.LoginResponse;
@@ -56,4 +57,20 @@ public class CustomerController {
     public LoginResponse login(@RequestBody LoginRequest loginRequest){
         return customerService.loginUsuario(loginRequest);
     }
+
+    @GetMapping("/baja/{dni}")
+    public int bajaUsuario(@PathVariable String dni){
+        return customerService.bajaUsuario(dni);
+    }
+
+    @GetMapping("/alta/{dni}")
+    public int altaUsuario(@PathVariable String dni){
+        return customerService.altaUsuario(dni);
+    }
+
+    @GetMapping("/reservas/{dni}")
+    public List<Reserva> listadoReservas(@PathVariable String dni){
+        return customerService.getAllReservas(dni);
+    }
+
 }
