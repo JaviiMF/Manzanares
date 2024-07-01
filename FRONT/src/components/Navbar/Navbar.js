@@ -42,8 +42,7 @@ const Navbar = () => {
     };
 
     const handleComment = () => {
-        // Aquí puedes definir la lógica para manejar el comentario, por ejemplo abrir una ventana modal o navegar a una página de comentarios.
-        // Por ahora, solo mostraremos un mensaje en consola.
+        navigate("/comentarios");
         console.log('Abrir ventana de comentarios o navegar a página de comentarios');
     };
 
@@ -75,14 +74,6 @@ const Navbar = () => {
                             onClick={handlePerfil}
                         >
                             <FontAwesomeIcon icon={faUser} className="mr-2"/>
-                        </button>
-                    )}
-                    {hasCliente && (
-                        <button
-                            className="btn btn-link text-dark"
-                            onClick={handleComment}
-                        >
-                            <FontAwesomeIcon icon={faComment} className="mr-2"/>
                         </button>
                     )}
                     {hasRecepcionista && (
@@ -120,6 +111,12 @@ const Navbar = () => {
                         </Dropdown></button>
 
                     )}
+                    <button
+                        className="btn btn-link text-dark"
+                        onClick={handleComment}
+                    >
+                        <FontAwesomeIcon icon={faComment} className="mr-2"/>
+                    </button>
                     {hasDNI && (
                         <button
                             className="btn btn-link text-dark"

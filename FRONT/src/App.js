@@ -26,6 +26,7 @@ import Register  from './components/Register/Register';
 import ListaReserva from './components/Recepcionista/ListaReserva';
 import EditarReserva from './components/Recepcionista/EditarReserva';
 import Perfil from './components/Perfil/Perfil';
+import Comentario from './components/Comentario/Comentario'
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
             <Route path="/ListaReserva" element={<ListaReserva />} />
             <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
             <Route path="/Perfil" element={<Perfil />} />
+            <Route path="/Comentarios" element={<Comentario />} />
           </Routes>
         </main>
       </div>

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ComentarioServiceImpl implements ComentarioService {
@@ -22,5 +24,15 @@ public class ComentarioServiceImpl implements ComentarioService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public List<Comentario> getAllComentarios() {
+        return comentarioRepository.findAll();
+    }
+
+    @Override
+    public int deleteComentary(Long id){
+        return comentarioRepository.deleteComentarioById(id);
     }
 }

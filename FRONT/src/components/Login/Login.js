@@ -30,11 +30,15 @@ const Login = () => {
             if (response.status === 200) {
                 // Almacenar el ID del usuario en la memoria local
                 if (response.data !== "") {
-                    localStorage.setItem('userDni', response.data.dni);
-                    localStorage.setItem('userTipo', response.data.tipo);
-                    console.log('Usuario ingresó con éxito');
-                    navigate("/");
-                    window.location.reload(); // Recarga la página para reflejar el logout
+                    if(response.data.dni !== null){
+                        localStorage.setItem('userDni', response.data.dni);
+                        localStorage.setItem('userTipo', response.data.tipo);
+                        console.log('Usuario ingresó con éxito');
+                        navigate("/");
+                        window.location.reload();
+                    } else {
+                        alert("Usuario no encontrado");
+                    }
                 } else {
                     localStorage.setItem('userDni', null);
                     alert("Usuario no encontrado");

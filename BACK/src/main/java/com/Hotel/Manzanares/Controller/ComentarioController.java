@@ -4,10 +4,9 @@ import com.Hotel.Manzanares.Entity.Comentario;
 import com.Hotel.Manzanares.Service.ComentarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(("/comentario"))
@@ -25,5 +24,15 @@ public class ComentarioController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @GetMapping("/all")
+    public List<Comentario> getAllComentario(){
+        return comentarioService.getAllComentarios();
+    }
+
+    @DeleteMapping("/deleteComentario/{id}")
+    public int deleteComentario(@PathVariable Long id){
+        return comentarioService.deleteComentary(id);
     }
 }
