@@ -5,6 +5,7 @@ export function ListaServicio() {
     const [servicios, setServicios] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
 
     useEffect(() => {
         fetch("http://localhost:8080/servicio/allServicios")
@@ -20,8 +21,12 @@ export function ListaServicio() {
             .catch(error => {
                 setError(error.message);
             });
-    }, []);
 
+            if (tipo !== "administrador") {
+                ('/error');
+            }       
+                
+        }, [navigate]);
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este servicio?");

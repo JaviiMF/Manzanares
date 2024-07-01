@@ -178,7 +178,7 @@ function CrearReserva() {
   };
 
   const getMarginTop = () => {
-    const baseMargin = 100; // Margen base de 80px
+    const baseMargin = 10; // Margen base de 80px
     const additionalMargin = Math.ceil(habitacionesDisponibles.length / 3) * 500; // 80px adicionales por cada 3 elementos
     return baseMargin + additionalMargin;
   };
@@ -263,9 +263,9 @@ function CrearReserva() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="reserve-container" style={{ marginTop: getMarginTop() }}>
       <Navbar />
-      <div className="main-content" style={{ marginTop: getMarginTop() }}>
+      <div className="main-content" >
         <h2 className="mb-4">Crear Reserva</h2>
         <form onSubmit={handleSubmit}>
           <div className="row">

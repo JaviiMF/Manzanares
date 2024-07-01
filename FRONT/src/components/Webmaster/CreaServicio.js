@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export function CreaServicio() {
     const [nombre, setNombre] = useState('');
@@ -8,8 +9,16 @@ export function CreaServicio() {
     const [hor1, setHor1] = useState('');
     const [hor2, setHor2] = useState('');
     const [horario, setHorario] = useState('');
-    const [imagen, setImagen] = useState('');
     const [error,  setError] = useState('');
+    const navigate = useNavigate();
+    const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
+
+    
+    useEffect(() => {
+        if (tipo !== "administrador") {
+            navigate('/error');
+        }       
+    }, [navigate]);
 
     const validateHorario = () => {
         return hor1 <= hor2;
@@ -50,7 +59,6 @@ export function CreaServicio() {
                 setHor1('');
                 setHor2('');
                 setHorario('');
-                setImagen('');
                 setError('');
             })
             .catch(error => {

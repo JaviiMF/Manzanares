@@ -84,10 +84,12 @@ const Navbar = () => {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item href="/gestion-clientes">Gestionar Clientes</Dropdown.Item>
+                                <Dropdown.Item href="/CrearReserva">Crear Reservas</Dropdown.Item>
                                 <Dropdown.Item href="/clientes">Listado Clientes</Dropdown.Item>
                                 <Dropdown.Item href="/servicios">Listado Servicios</Dropdown.Item>
                                 <Dropdown.Item href="/ListaReserva">Listado Reservas</Dropdown.Item>
-
+                                <Dropdown.Item href="/ListaDescuento">Listado De Descuentos</Dropdown.Item>
+                                
                             </Dropdown.Menu>
                         </Dropdown></button>
 
@@ -100,12 +102,15 @@ const Navbar = () => {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item href="/habitaciones">Gestionar Habitaciones</Dropdown.Item>
+                                <Dropdown.Item href="/clientes">Gestionar Clientes</Dropdown.Item>
+                                <Dropdown.Item href="/servicios">Gestionar Servicios</Dropdown.Item>
+                                <Dropdown.Item href="/ListaReserva">Gestionar Reservas</Dropdown.Item>
+                                <Dropdown.Item href="/ListaDescuento">Gestionar Descuentos</Dropdown.Item>
+                                <Dropdown.Item href="/CrearReserva">Crear Reservas</Dropdown.Item>
+                                <Dropdown.Item href="/CreaDescuento">Crear Descuentos</Dropdown.Item>
                                 <Dropdown.Item href="/gestion-habitaciones">Crear Habitaciones</Dropdown.Item>
-                                <Dropdown.Item href="/gestion-clientes">Gestionar Clientes</Dropdown.Item>
-                                <Dropdown.Item href="/clientes">Listado Clientes</Dropdown.Item>
-                                <Dropdown.Item href="/servicios">Listado Servicios</Dropdown.Item>
-                                <Dropdown.Item href="/gestion-servicios">Gestionar Servicios</Dropdown.Item>
-                                <Dropdown.Item href="/ListaReserva">Listado Reservas</Dropdown.Item>
+                                <Dropdown.Item href="/gestion-servicios">Crear Servicios</Dropdown.Item>
+                                <Dropdown.Item href="/gestion-clientes">Crear Clientes</Dropdown.Item>
 
                             </Dropdown.Menu>
                         </Dropdown></button>

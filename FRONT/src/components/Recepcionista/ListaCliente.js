@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 export function ListaCliente() {
     const [clientes, setClientes] = useState([]);
+    const [webmaster, setWebmaster] = useState([]);
+    const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         fetch("http://localhost:8080/customer/all")
@@ -20,7 +23,16 @@ export function ListaCliente() {
             .catch(error => {
                 setError(error.message);
             });
-    }, []);
+
+        if (tipo === "administrador") {
+            setWebmaster(true);
+        } else if (tipo === "recepcionista"){
+            setWebmaster(false);
+        }
+        else {        
+            navigate('/error');
+        }
+    }, [navigate]);
 
 
     const handleDelete = (dni) => {
@@ -66,7 +78,7 @@ export function ListaCliente() {
                         <th>DNI</th>
                         <th>Teléfono</th>
                         <th>Tipo</th>
-                        <th>Acción</th>
+                        {webmaster && <th>Acción</th> }
                     </tr>
                     </thead>
                     <tbody>
@@ -78,6 +90,7 @@ export function ListaCliente() {
                                 <td>{cliente.dni}</td>
                                 <td>{cliente.telefono}</td>
                                 <td>{cliente.tipo}</td>
+                                {webmaster && (
                                 <td>
                                     <button type="button" className="edit-button"
                                             onClick={() => handleEdit(cliente.dni)}>
@@ -88,6 +101,7 @@ export function ListaCliente() {
                                         Borrar
                                     </button>
                                 </td>
+                                )}
                             </tr>
                         ))}
                     </tbody>

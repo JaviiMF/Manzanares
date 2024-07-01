@@ -26,13 +26,18 @@ function CrearReserva() {
   const navigate = useNavigate();
   const [reservas, setReservas] = useState([]);
   const [numerosHabitacion, setNumerosHabitacion] = useState([]);
-
+  const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
+  
   useEffect(() => {
     fetchDescuentos();
     fetchExtras();
     fetchServicios();
     cargarReservas();
-  }, []);
+
+    if (tipo !== "administrador") {
+      navigate('/error');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (fechaEntrada && fechaSalida) {

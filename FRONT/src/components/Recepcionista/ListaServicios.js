@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 export function ListaServicios() {
     const [clientes, setClientes] = useState([]);
+    const [webmaster, setWebmaster] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
 
 
     useEffect(() => {
@@ -21,7 +23,17 @@ export function ListaServicios() {
             .catch(error => {
                 setError(error.message);
             });
-    }, []);
+
+            if (tipo === "administrador") {
+                setWebmaster(true);
+            } else if (tipo === "recepcionista"){
+                setWebmaster(false);
+            }
+            else {        
+                navigate('/error');
+            }
+
+    }, [navigate]);
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("¿Estás seguro de que deseas borrar este servicio?");
@@ -62,7 +74,7 @@ export function ListaServicios() {
                         <th style={{textAlign: 'center'}}>Descripción</th>
                         <th style={{textAlign: 'center'}}>Horario</th>
                         <th style={{textAlign: 'center'}}>Precio</th>
-                        <th style={{textAlign: 'center'}}>Acciones</th>
+                        {webmaster && <th style={{textAlign: 'center'}}>Acciones</th>}
                     </tr>
                     </thead>
                     <tbody>
@@ -71,14 +83,16 @@ export function ListaServicios() {
                             <td style={{textAlign: 'center'}}>{cliente.descripcion}</td>
                             <td style={{textAlign: 'center'}}>{cliente.horario}</td>
                             <td style={{textAlign: 'center'}}>{cliente.precio}</td>
-                            <td style={{textAlign: 'center'}}>
-                                <button type="button" className="edit-button"
-                                        onClick={() => handleEdit(cliente.id)}>Editar
-                                </button>
-                                <button type="button" className="delete-button"
-                                        onClick={() => handleDelete(cliente.id)}>Borrar
-                                </button>
-                            </td>
+                            {webmaster && (
+                                <td style={{textAlign: 'center'}}>
+                                    <button type="button" className="edit-button"
+                                            onClick={() => handleEdit(cliente.id)}>Editar
+                                    </button>
+                                    <button type="button" className="delete-button"
+                                            onClick={() => handleDelete(cliente.id)}>Borrar
+                                    </button>
+                                </td>
+                            )}
                         </tr>
                     ))}
                     </tbody>

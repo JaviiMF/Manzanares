@@ -6,10 +6,21 @@ const ListarReservas = () => {
   const [reservas, setReservas] = useState([]);
   const [numerosHabitacion, setNumerosHabitacion] = useState([]);
   const navigate = useNavigate(); // Usamos useNavigate en lugar de useHistory
+  const [webmaster, setWebmaster] = useState([]);
+  const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
 
   useEffect(() => {
     cargarReservas();
-  }, []);
+
+    if (tipo === "administrador") {
+      setWebmaster(true);
+    } else if (tipo === "recepcionista"){
+      setWebmaster(false);
+    }
+    else {        
+      navigate('/error');
+  }
+  }, [navigate]);
 
   const cargarReservas = async () => {
     try {
@@ -64,7 +75,7 @@ const ListarReservas = () => {
             <th>Fecha Check-In</th>
             <th>Fecha Check-Out</th>
             <th>Estado</th>
-            <th>Acciones</th>
+            {webmaster && <th>Acciones</th>}
           </tr>
         </thead>
         <tbody>
@@ -75,20 +86,23 @@ const ListarReservas = () => {
               <td>{reserva.fechaCheckin.split('T')[0]}</td>
               <td>{reserva.fechaCheckout.split('T')[0]}</td>
               <td>{reserva.activa ? 'Activa' : 'Inactiva'}</td>
-              <td>
-                <button
+              
+              {webmaster && (
+                <td>
+                  <button
                   className="btn btn-primary btn-sm mr-2"
                   onClick={() => handleActivarDesactivarReserva(reserva.id, !reserva.activa)}
-                >
-                  {reserva.activa ? 'Desactivar' : 'Activar'}
-                </button>
-                <button
-                  className="btn btn-outline-primary btn-sm"
-                  onClick={() => handleEditarReserva(reserva.id,  !reserva.activa)}
-                >
-                  Editar
-                </button>
-              </td>
+                  >
+                    {reserva.activa ? 'Desactivar' : 'Activar'}
+                  </button>
+                  <button
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={() => handleEditarReserva(reserva.id,  !reserva.activa)}
+                  >
+                    Editar
+                  </button>
+                </td>
+              )}     
             </tr>
           ))}
         </tbody>

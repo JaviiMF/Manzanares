@@ -1,4 +1,13 @@
 /* styles.css */
+.reserve-container{
+
+  margin-top: 100px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .form-group label {
     font-weight: bold;
   }
@@ -39,6 +48,8 @@
   .form-check-input {
     margin-top: 0.3rem;
     margin-right: 0.5rem;
+    margin-right: 10px;
+    border-color: #007bff;
   }
 
 

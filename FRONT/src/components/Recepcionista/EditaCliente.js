@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 
+
 export function EditaCliente() {
     const [nombre, setNombre] = useState('');
     const [dni, setDni] = useState('');
@@ -17,6 +18,7 @@ export function EditaCliente() {
     const [direccion, setDireccion] = useState('');
     const { dniAux } = useParams();
     const navigate = useNavigate();
+    const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
 
     useEffect(() => {
         // Fetch user data
@@ -39,7 +41,12 @@ export function EditaCliente() {
                 console.error('Error al obtener los datos del cliente:', error);
                 setError('Error al cargar los datos del cliente.');
             });
-    }, [dniAux]);
+
+            if (tipo !== "administrador") {
+                navigate('/error');
+            }  
+
+    }, [dniAux, navigate]);
 
     const validatePasswords = () => {
         return contrasena === confPassword;

@@ -27,6 +27,9 @@ import ListaReserva from './components/Recepcionista/ListaReserva';
 import EditarReserva from './components/Recepcionista/EditarReserva';
 import Perfil from './components/Perfil/Perfil';
 import Comentario from './components/Comentario/Comentario'
+import { CreaDescuento } from './components/Webmaster/CreaDescuento';
+import { ListaDescuento } from './components/Webmaster/ListaDescuento';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 
 function App() {
@@ -37,6 +40,7 @@ function App() {
         <main className="content">
           <Routes>
             <Route path="/" element={<Home />} /> 
+            <Route path="/error" element={<ErrorPage/>} />
             <Route path='/Login' element={<Login/>}/> 
             <Route path='/Register' element={<Register/>}/> 
             <Route path="/gestion-clientes" element={<Clientes/>} />
@@ -55,6 +59,8 @@ function App() {
             <Route path="/editarReserva/:idReserva" element={<EditarReserva />} />
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Comentarios" element={<Comentario />} />
+            <Route path="/CreaDescuento" element={<CreaDescuento/>} />
+            <Route path="/ListaDescuento" element={<ListaDescuento/>} />
           </Routes>
         </main>
       </div>

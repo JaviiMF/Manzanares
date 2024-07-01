@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function EditaUsuario() {
     const [nombre, setNombre] = useState('');
@@ -18,6 +19,7 @@ export function EditaUsuario() {
     const [direccion, setDireccion] = useState('');
     const { dniAux } = useParams();
     const navigate = useNavigate();
+    const [tipoAuth, setTipoAuth] = useState(localStorage.getItem('userTipo'));
 
     useEffect(() => {
         // Fetch user data
@@ -41,7 +43,11 @@ export function EditaUsuario() {
                 console.error('Error al obtener los datos del cliente:', error);
                 setError('Error al cargar los datos del cliente.');
             });
-    }, [dniAux]);
+
+            if (tipoAuth !== "administrador") {
+                navigate('/error');
+            }  
+    }, [dniAux, navigate]);
 
     const validatePasswords = () => {
         return password === confPassword;

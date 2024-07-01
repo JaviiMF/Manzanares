@@ -5,6 +5,7 @@ export function ListaHabitacion() {
     const [habitaciones, setHabitaciones] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
 
     useEffect(() => {
         fetch("http://localhost:8080/room/all")
@@ -20,7 +21,11 @@ export function ListaHabitacion() {
             .catch(error => {
                 setError(error.message);
             });
-    }, []);
+
+        if (tipo !== "administrador") {
+            navigate('/error');
+        }       
+    }, [navigate]);
 
 
     const handleDelete = (id) => {
@@ -83,7 +88,7 @@ export function ListaHabitacion() {
                         <th>Gama</th>
                         <th>¿Mascotas?</th>
                         <th>Precio</th>
-                        <th>Acciones</th>
+                        <th>Acción</th> 
                     </tr>
                     </thead>
                     <tbody>
@@ -94,8 +99,8 @@ export function ListaHabitacion() {
                                 <td>{habitacion.numcamas}</td>
                                 <td>{habitacion.gama}</td>
                                 <td>{habitacion.mascotas ? "Si" : "No"}</td>
-                                <td>{habitacion.precio}</td>
-                                <td>
+                                <td>{habitacion.precio}
+                                </td>                                    <td>
                                     {habitacion.activa && (
                                         <button type="button" className="delete-button"
                                                 onClick={() => handleDelete(habitacion.id)}>
@@ -105,7 +110,7 @@ export function ListaHabitacion() {
                                     {!habitacion.activa && (
                                         <button type="button"  className="btn btn-success btn-block" onClick={() => handleEnable(habitacion.id)}>Habilitar</button>
                                     )}
-                                </td>
+                                </td>               
                             </tr>
                         ))}
                     </tbody>
