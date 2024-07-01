@@ -263,15 +263,15 @@ function CrearReserva() {
   }, []);
 
   return (
-    <div className="reserve-container" style={{ marginTop: getMarginTop() }}>
+    <div className="reserve-container" style={{ marginTop: '200px' }}>
       <Navbar />
       <div className="main-content" >
-        <h2 className="mb-4">Crear Reserva</h2>
+        <h2 className="mb-4">{localStorage.getItem("lenguaje") === "ES" ? "Crear Reserva" : "Create Reservation"}</h2>
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6">
               {!hasTipo && (<div className="form-group">
-                <label>DNI del Cliente:</label>
+                <label>{localStorage.getItem("lenguaje") === "ES" ? "DNI del Cliente:" : "Client's ID:"}</label>
                 <input
                     type="text"
                     className={`form-control ${!dniValido ? 'is-invalid' : ''}`}
@@ -279,10 +279,10 @@ function CrearReserva() {
                     onChange={(e) => setDni(e.target.value)}
                     required
                 />
-                {!dniValido && <small className="text-danger">El DNI no existe.</small>}
+                {!dniValido && <small className="text-danger">{localStorage.getItem("lenguaje") === "ES" ? "El DNI no existe." : "Invalid DNI."}</small>}
               </div>)}
-              {hasTipo && ( <div className="form-group">
-                <label>DNI del Cliente:</label>
+              {hasTipo && (<div className="form-group">
+                <label>{localStorage.getItem("lenguaje") === "ES" ? "DNI del Cliente:" : "Client's ID:"}</label>
                 <input
                     type="text"
                     className={`form-control ${!dniValido ? 'is-invalid' : ''}`}
@@ -290,12 +290,12 @@ function CrearReserva() {
                     readOnly
                     required
                 />
-                {!dniValido && <small className="text-danger">El DNI no existe.</small>}
+                {!dniValido && <small className="text-danger">{localStorage.getItem("lenguaje") === "ES" ? "El DNI no existe." : "Invalid DNI."}</small>}
               </div>)}
             </div>
             <div className="col-md-3">
               <div className="form-group">
-                <label>Fecha Entrada:</label>
+                <label>{localStorage.getItem("lenguaje") === "ES" ? "Fecha Entrada:" : "Check-in Date:"}</label>
                 <input
                     type="date"
                     className="form-control"
@@ -308,57 +308,58 @@ function CrearReserva() {
             </div>
             <div className="col-md-3">
               <div className="form-group">
-                <label>Fecha Salida:</label>
+                <label>{localStorage.getItem("lenguaje") === "ES" ? "Fecha Salida:" : "Check-out Date:"}</label>
                 <input
-                  type="date"
-                  className="form-control"
-                  value={fechaSalida}
-                  onChange={handleFechaSalidaChange}
-                  min={new Date().toISOString().split("T")[0]}
-                  required
+                    type="date"
+                    className="form-control"
+                    value={fechaSalida}
+                    onChange={handleFechaSalidaChange}
+                    min={new Date().toISOString().split("T")[0]}
+                    required
                 />
               </div>
             </div>
             <div className="col-md-12">
               <div className="form-group">
-                <label>Descuento:</label>
+                <label>{localStorage.getItem("lenguaje") === "ES" ? "Descuento:" : "Discount:"}</label>
                 <select
-                  className="form-control"
-                  value={descuento}
-                  onChange={(e) => setDescuento(e.target.value)}
-                  required
+                    className="form-control"
+                    value={descuento}
+                    onChange={(e) => setDescuento(e.target.value)}
+                    required
                 >
-                  <option value="">Selecciona un descuento</option>
+                  <option
+                      value="">{localStorage.getItem("lenguaje") === "ES" ? "Selecciona un descuento" : "Select a discount"}</option>
                   {descuentos.map((descuento) => (
-                    <option key={descuento.id} value={descuento.id}>
-                      {descuento.descripcion} - {descuento.porcentaje}
-                    </option>
+                      <option key={descuento.id} value={descuento.id}>
+                        {descuento.descripcion} - {descuento.porcentaje}
+                      </option>
                   ))}
                 </select>
               </div>
             </div>
             <div className="col-md-12">
               <div className="form-group">
-                <label>Habitaciones Disponibles:</label>
+                <label>{localStorage.getItem("lenguaje") === "ES" ? "Habitaciones Disponibles:" : "Available Rooms:"}</label>
                 <div className="row">
                   {habitacionesDisponibles.map((habitacionDisponible) => (
-                    <div
-                      key={habitacionDisponible.id}
-                      className={`col-md-4 habitacion-card ${habitacionDisponible.id === habitacion ? 'selected' : ''}`}
-                      onClick={() => handleHabitacionSeleccionada(habitacionDisponible)}
-                      required
-                    >
-                      <h5>Habitación {habitacionDisponible.num}</h5>
-                      <img
-                        src={obtenerRutaImagen(habitacionDisponible)}
-                        alt={`Habitación ${habitacionDisponible.num}`}
-                        className="img-fluid"
-                      />
-                      <p>Numero de camas: {habitacionDisponible.numcamas}</p>
-                      <p>Precio: ${habitacionDisponible.precio}</p>
-                      <p>Metros cuadrados: {habitacionDisponible.m2} m2</p>
-                      <p>Mascotas: {obtenerMascota(habitacionDisponible)}</p>
-                    </div>
+                      <div
+                          key={habitacionDisponible.id}
+                          className={`col-md-4 habitacion-card ${habitacionDisponible.id === habitacion ? 'selected' : ''}`}
+                          onClick={() => handleHabitacionSeleccionada(habitacionDisponible)}
+                          required
+                      >
+                        <h5>{localStorage.getItem("lenguaje") === "ES" ? `Habitación ${habitacionDisponible.num}` : `Room ${habitacionDisponible.num}`}</h5>
+                        <img
+                            src={obtenerRutaImagen(habitacionDisponible)}
+                            alt={`${localStorage.getItem("lenguaje") === "ES" ? "Habitación" : "Room"} ${habitacionDisponible.num}`}
+                            className="img-fluid"
+                        />
+                        <p>{localStorage.getItem("lenguaje") === "ES" ? `Numero de camas: ${habitacionDisponible.numcamas}` : `Number of beds: ${habitacionDisponible.numcamas}`}</p>
+                        <p>{localStorage.getItem("lenguaje") === "ES" ? `Precio: $${habitacionDisponible.precio}` : `Price: $${habitacionDisponible.precio}`}</p>
+                        <p>{localStorage.getItem("lenguaje") === "ES" ? `Metros cuadrados: ${habitacionDisponible.m2} m2` : `Square meters: ${habitacionDisponible.m2} m2`}</p>
+                        <p>{localStorage.getItem("lenguaje") === "ES" ? `Mascotas: ${obtenerMascota(habitacionDisponible)}` : `Pets: ${obtenerMascota(habitacionDisponible)}`}</p>
+                      </div>
                   ))}
                 </div>
               </div>
@@ -369,24 +370,24 @@ function CrearReserva() {
             <div className="col-md-6">
               <h4>Extras:</h4>
               {extras.map((extra) => (
-                <div key={extra.id} className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id={`extra-${extra.id}`}
-                    checked={extrasSeleccionados.some((e) => e.id === extra.id)}
-                    onChange={() => handleExtraChange(extra)}
-                  />
-                  <label className="form-check-label" htmlFor={`extra-${extra.id}`}>
+                  <div key={extra.id} className="form-check">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={`extra-${extra.id}`}
+                        checked={extrasSeleccionados.some((e) => e.id === extra.id)}
+                        onChange={() => handleExtraChange(extra)}
+                    />
+                    <label className="form-check-label" htmlFor={`extra-${extra.id}`}>
                     {extra.descripcion} - ${extra.precio}
                   </label>
                 </div>
               ))}
             </div>
             <div className="col-md-6">
-              <h4>Servicios:</h4>
+              <h4>{localStorage.getItem("lenguaje") === "ES" ? "Servicios:" : "Services:"}</h4>
               {servicios.map((servicio) => (
-                <div key={servicio.id} className="form-check">
+                  <div key={servicio.id} className="form-check">
                   <input
                     className="form-check-input"
                     type="checkbox"
@@ -405,12 +406,12 @@ function CrearReserva() {
           {error && <div className="alert alert-danger mt-4">{error}</div>}
 
           <button type="submit" className="btn btn-primary mt-4" disabled={!dni || !fechaEntrada || !fechaSalida || !descuento || !habitacion}>
-            Crear Reserva
+            {localStorage.getItem("lenguaje") === "ES" ? "Crear Reserva" : "Create Reservation"}
           </button>
         </form>
         <div className="mt-4">
           {mensaje && <p>{mensaje}</p>}
-          <h4>Precio Total: ${precioTotal}</h4>
+          <h4>{localStorage.getItem("lenguaje") === "ES" ? "Precio Total:" : "Total Price:"} ${precioTotal}</h4>
         </div>
       </div>
     </div>

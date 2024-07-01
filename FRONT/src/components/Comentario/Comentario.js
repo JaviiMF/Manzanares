@@ -83,13 +83,13 @@ const Comentarios = () => {
 
     return (
         <div>
-            <h1 style={{ marginTop: "180px" }}>Comentarios</h1>
+            <h1 style={{ marginTop: "180px" }}>{localStorage.getItem("lenguaje") === "ES" ? "Comentarios" : "Comments"}</h1>
             <table className="table mt-3" style={{ textAlign: 'center' }}>
                 <thead>
                 <tr>
                     <th>DNI Usuario</th>
-                    <th>Comentario</th>
-                    <th>Valoración</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Comentario" : "Comment"}</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Valoracion" : "Rating"}</th>
                     {administrador && (
                         <th>Acciones</th>
                     )}
@@ -114,10 +114,10 @@ const Comentarios = () => {
             </table>
             {reservaActiva && (
                 <>
-                    <h1 className="mt-5">Añadir Comentario</h1>
+                    <h1 className="mt-5">{localStorage.getItem("lenguaje") === "ES" ? "Añadir Comentario" : "Add Comment"}</h1>
                     <form onSubmit={handleSubmit} className="comentario-form">
                         <div className="form-group">
-                            <label>Comentario:</label>
+                            <label>{localStorage.getItem("lenguaje") === "ES" ? "Comentario:" : "Comment:"}</label>
                             <textarea
                                 name="comentario"
                                 value={nuevoComentario.comentario}
@@ -127,7 +127,7 @@ const Comentarios = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Valoración:</label>
+                            <label>{localStorage.getItem("lenguaje") === "ES" ? "Valoracion:" : "Rating:"}</label>
                             <select
                                 name="valoracion"
                                 value={nuevoComentario.valoracion}
@@ -142,7 +142,7 @@ const Comentarios = () => {
                                 ))}
                             </select>
                         </div>
-                        <button type="submit" className="btn btn-primary">Añadir Comentario</button>
+                        <button type="submit" className="btn btn-primary">{localStorage.getItem("lenguaje") === "ES" ? "Añadir Comentario" : "Add Comment"}</button>
                     </form>
                 </>
             )}

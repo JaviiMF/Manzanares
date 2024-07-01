@@ -9,7 +9,7 @@ export function EditaCliente() {
     const [contrasena, setContrasena] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [pais, setPais] = useState('');
-    const [apellidos, setApellidos] = useState('');
+    const [apellido, setApellido] = useState('');
     const [email, setEmail] = useState('');
     const [confPassword, setConfPassword] = useState('');
     const [telefono, setTelefono] = useState('');
@@ -31,7 +31,7 @@ export function EditaCliente() {
                 setConfPassword('');
                 setFechaNacimiento(cliente.fechaNacimiento);
                 setPais(cliente.pais);
-                setApellidos(cliente.apellidos);
+                setApellido(cliente.apellido);
                 setEmail(cliente.email);
                 setTelefono(cliente.telefono);
                 setGenero(cliente.genero);
@@ -64,9 +64,7 @@ export function EditaCliente() {
         if (nombre) data.nombre = nombre;
         if (dni) data.dni = dni;
         if (contrasena) data.contrasena = contrasena;
-        if (fechaNacimiento) data.fechaNacimiento = fechaNacimiento;
-        if (pais) data.pais = pais;
-        if (apellidos) data.apellidos = apellidos;
+        if (apellido) data.apellido = apellido;
         if (email) data.email = email;
         if (telefono) data.telefono = telefono;
         if (genero) data.genero = genero;
@@ -165,8 +163,8 @@ export function EditaCliente() {
                                 type="text" 
                                 name="apellidos" 
                                 id="apellidos" 
-                                value={apellidos} 
-                                onChange={(e) => setApellidos(e.target.value)} 
+                                value={apellido}
+                                onChange={(e) => setApellido(e.target.value)}
                             />
                         </div>
                         <div className="form-group">

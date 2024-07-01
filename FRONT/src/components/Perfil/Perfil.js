@@ -74,19 +74,19 @@ const UsuarioDetalle = () => {
     }
 
     return (
-        <div className="usuario-detalle">
-            <h1 style={{ fontWeight: "bold" }}>Datos Personales</h1>
+        <div className="usuario-detalle" style={{marginTop:"100px"}}>
+            <h1 style={{ fontWeight: "bold" }}>{localStorage.getItem("lenguaje") === "ES" ? "Datos Personales" : "Personal Information"}</h1>
             <table className="table mt-3" style={{ textAlign: 'center' }}>
                 <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Nombre" : "Name"}</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Apelldio" : "Surname"}</th>
                     <th>Email</th>
                     <th>DNI</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Género</th>
-                    <th>Activo</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Teléfono" : "Phone Number"}</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Direccion" : "Address"}</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Género" : "Gender"}</th>
+                    <th>{localStorage.getItem("lenguaje") === "ES" ? "Activo" : "Active"}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -104,12 +104,12 @@ const UsuarioDetalle = () => {
             </table>
             {activo && (
                 <div className="form-group mb-3">
-                    <button type="button" onClick={handleBaja} className="btn btn-danger btn-block">Darse de Baja</button>
+                    <button type="button" onClick={handleBaja} className="btn btn-danger btn-block">{localStorage.getItem("lenguaje") === "ES" ? "Darse de Baja" : "Deactivate Account"}</button>
                 </div>
             )}
             {!activo && (
                 <div className="form-group mb-3">
-                    <button type="button" onClick={handleAlta} className="btn btn-success btn-block">Darse de Alta</button>
+                    <button type="button" onClick={handleAlta} className="btn btn-success btn-block">{localStorage.getItem("lenguaje") === "ES" ? "Darse de Baja" : "Activate Account"}</button>
                 </div>
             )}
             {activo && (
@@ -138,7 +138,7 @@ const UsuarioDetalle = () => {
                                 <td>{parseFloat(reserva.precioTotal.toFixed(2))}</td>
                                 <td>{reserva.activa ? (
                                     <button type="button" onClick={() => handleBajaReserva(reserva.id)}
-                                            className="btn btn-danger btn-sm">Dar de baja</button>
+                                            className="btn btn-danger btn-sm">{localStorage.getItem("lenguaje") === "ES" ? "Cancelar" : "Cancel"}</button>
                                 ) : (
                                     "No"
                                 )}</td>

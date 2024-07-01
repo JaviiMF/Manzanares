@@ -42,7 +42,7 @@ const CarouselComponent = () => {
                     <div key={index}>
                         <img src={image.src} alt={image.alt} />
                         <p className="legend" onClick={handleReserveClick}>
-                            RESERVA YA
+                            {localStorage.getItem("lenguaje") === "ES" ? "RESERVA YA" : "RESERVE NOW"}
                         </p>
                     </div>
                 ))}

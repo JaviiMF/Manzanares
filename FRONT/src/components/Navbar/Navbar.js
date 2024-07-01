@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog,faUser,faSignInAlt,faComment, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faLanguage,faCog,faUser,faSignInAlt,faComment, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.jpeg';
 import './Navbar.css';
@@ -50,6 +50,15 @@ const Navbar = () => {
         navigate("/perfil");
     }
 
+    function handleIdioma() {
+        if(localStorage.getItem("lenguaje") === "ES"){
+            localStorage.setItem("lenguaje", "EN");
+        } else {
+            localStorage.setItem("lenguaje", "ES");
+        }
+        window.location.reload();
+    }
+
     return (
         <nav className="navbar navbar-light bg-white fixed-top border-bottom">
             <div className="container d-flex justify-content-between align-items-center">
@@ -68,6 +77,12 @@ const Navbar = () => {
                     </a>
                 </div>
                 <div>
+                    <button
+                        className="btn btn-link text-dark"
+                        onClick={handleIdioma}
+                    >
+                        <FontAwesomeIcon icon={faLanguage} className="mr-2"/>
+                    </button>
                     {hasCliente && (
                         <button
                             className="btn btn-link text-dark"
@@ -89,7 +104,7 @@ const Navbar = () => {
                                 <Dropdown.Item href="/servicios">Listado Servicios</Dropdown.Item>
                                 <Dropdown.Item href="/ListaReserva">Listado Reservas</Dropdown.Item>
                                 <Dropdown.Item href="/ListaDescuento">Listado De Descuentos</Dropdown.Item>
-                                
+
                             </Dropdown.Menu>
                         </Dropdown></button>
 

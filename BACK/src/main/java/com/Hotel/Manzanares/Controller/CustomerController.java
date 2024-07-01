@@ -72,5 +72,4 @@ public class CustomerController {
     public List<Reserva> listadoReservas(@PathVariable String dni){
         return customerService.getAllReservas(dni);
     }
-
 }

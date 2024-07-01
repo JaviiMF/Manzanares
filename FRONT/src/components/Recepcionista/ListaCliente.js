@@ -98,7 +98,7 @@ export function ListaCliente() {
                                     </button>
                                     <button type="button" className="delete-button"
                                             onClick={() => handleDelete(cliente.dni)}>
-                                        Borrar
+                                        Deshabilitar
                                     </button>
                                 </td>
                                 )}
