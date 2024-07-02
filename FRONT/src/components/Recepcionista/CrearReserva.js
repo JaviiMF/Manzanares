@@ -263,7 +263,7 @@ function CrearReserva() {
   }, []);
 
   return (
-    <div className="reserve-container" style={{ marginTop: '200px' }}>
+    <div className="reserve-container" style={{ marginTop: '2300px' }}>
       <Navbar />
       <div className="main-content" >
         <h2 className="mb-4">{localStorage.getItem("lenguaje") === "ES" ? "Crear Reserva" : "Create Reservation"}</h2>

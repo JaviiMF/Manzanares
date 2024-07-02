@@ -6,7 +6,8 @@ const ListarReservas = () => {
   const [reservas, setReservas] = useState([]);
   const [numerosHabitacion, setNumerosHabitacion] = useState([]);
   const navigate = useNavigate(); // Usamos useNavigate en lugar de useHistory
-  const [webmaster, setWebmaster] = useState([]);
+  const [webmaster, setWebmaster] = useState(false);
+  const [recepcionista, setRecepcionista] = useState(false);
   const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
 
   useEffect(() => {
@@ -16,6 +17,8 @@ const ListarReservas = () => {
       setWebmaster(true);
     } else if (tipo === "recepcionista"){
       setWebmaster(false);
+      setRecepcionista(true);
+      console.log(recepcionista);
     }
     else {        
       navigate('/error');
@@ -75,7 +78,7 @@ const ListarReservas = () => {
             <th>Fecha Check-In</th>
             <th>Fecha Check-Out</th>
             <th>Estado</th>
-            {webmaster && <th>Acciones</th>}
+            {(webmaster || recepcionista) && <th>Acciones</th>}
           </tr>
         </thead>
         <tbody>
@@ -87,7 +90,7 @@ const ListarReservas = () => {
               <td>{reserva.fechaCheckout.split('T')[0]}</td>
               <td>{reserva.activa ? 'Activa' : 'Inactiva'}</td>
               
-              {webmaster && (
+              {(webmaster || recepcionista) && (
                 <td>
                   <button
                   className="btn btn-primary btn-sm mr-2"

@@ -34,7 +34,7 @@ function CrearReserva() {
     fetchServicios();
     cargarReservas();
 
-    if (tipo !== "administrador") {
+    if (tipo === "cliente") {
       navigate('/error');
     }
   }, [navigate]);

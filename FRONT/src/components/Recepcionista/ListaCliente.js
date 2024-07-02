@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 export function ListaCliente() {
     const [clientes, setClientes] = useState([]);
-    const [webmaster, setWebmaster] = useState([]);
+    const [webmaster, setWebmaster] = useState(true);
+    const [recepcionista, setRecepcionista] = useState(true);
     const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ export function ListaCliente() {
             setWebmaster(true);
         } else if (tipo === "recepcionista"){
             setWebmaster(false);
+            setRecepcionista(true);
         }
         else {        
             navigate('/error');
@@ -61,7 +63,7 @@ export function ListaCliente() {
     };
 
     return (
-        <div style={{marginTop:"300px"}}>
+        <div style={{marginTop:"2000px"}}>
             <h3 className="list-title">Listado de Clientes</h3>
             <h4 className="list-description">En esta página puedes acceder a todos 
                 los datos sobre los usuarios, incluyendo sus reservas.</h4>
@@ -78,7 +80,7 @@ export function ListaCliente() {
                         <th>DNI</th>
                         <th>Teléfono</th>
                         <th>Tipo</th>
-                        {webmaster && <th>Acción</th> }
+                        {(webmaster || recepcionista) && <th>Acción</th> }
                     </tr>
                     </thead>
                     <tbody>
@@ -90,18 +92,21 @@ export function ListaCliente() {
                                 <td>{cliente.dni}</td>
                                 <td>{cliente.telefono}</td>
                                 <td>{cliente.tipo}</td>
-                                {webmaster && (
                                 <td>
+                                    {webmaster && (
                                     <button type="button" className="edit-button"
                                             onClick={() => handleEdit(cliente.dni)}>
                                         Editar
                                     </button>
+                                    )}
+                                    {(webmaster || recepcionista )&& (
                                     <button type="button" className="delete-button"
                                             onClick={() => handleDelete(cliente.dni)}>
                                         Deshabilitar
                                     </button>
+                                    )}
                                 </td>
-                                )}
+
                             </tr>
                         ))}
                     </tbody>

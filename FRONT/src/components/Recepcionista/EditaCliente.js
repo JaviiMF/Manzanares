@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 export function EditaCliente() {
     const [nombre, setNombre] = useState('');
     const [dni, setDni] = useState('');
-    const [contrasena, setContrasena] = useState('');
+    const [password, setPassword] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [pais, setPais] = useState('');
     const [apellido, setApellido] = useState('');
@@ -19,6 +19,8 @@ export function EditaCliente() {
     const { dniAux } = useParams();
     const navigate = useNavigate();
     const [tipo, setTipo] = useState(localStorage.getItem('userTipo'));
+    const [tipoUsuario, setTipoUsuario] = useState('');
+    const [activoUsuario, setActivoUsuario] = useState('');
 
     useEffect(() => {
         // Fetch user data
@@ -27,7 +29,7 @@ export function EditaCliente() {
                 const cliente = response.data;
                 setNombre(cliente.nombre);
                 setDni(cliente.dni);
-                setContrasena(''); // Clear password fields
+                setPassword(''); // Clear password fields
                 setConfPassword('');
                 setFechaNacimiento(cliente.fechaNacimiento);
                 setPais(cliente.pais);
@@ -36,6 +38,8 @@ export function EditaCliente() {
                 setTelefono(cliente.telefono);
                 setGenero(cliente.genero);
                 setDireccion(cliente.direccion);
+                setTipoUsuario(cliente.tipo);
+                setActivoUsuario(cliente.activo);
             })
             .catch(error => {
                 console.error('Error al obtener los datos del cliente:', error);
@@ -49,7 +53,7 @@ export function EditaCliente() {
     }, [dniAux, navigate]);
 
     const validatePasswords = () => {
-        return contrasena === confPassword;
+        return password === confPassword;
     };
 
     const handleSubmit = (event) => {
@@ -63,12 +67,14 @@ export function EditaCliente() {
         const data = {};
         if (nombre) data.nombre = nombre;
         if (dni) data.dni = dni;
-        if (contrasena) data.contrasena = contrasena;
+        if (password) data.password = password;
         if (apellido) data.apellido = apellido;
         if (email) data.email = email;
         if (telefono) data.telefono = telefono;
         if (genero) data.genero = genero;
         if (direccion) data.direccion = direccion;
+        data.tipo = setTipoUsuario;
+        data.activo = activoUsuario;
 
         axios.put(`http://localhost:8080/customer/updateUsuario/${dniAux}`, data)
             .then(response => {
@@ -82,7 +88,7 @@ export function EditaCliente() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container" style={{marginTop:"1000px"}}>
             <form onSubmit={handleSubmit}>
                 <h3 className="form-title">Editar Cliente</h3>
                 <h4 className="form-description">En esta página se pueden editar las cuentas de los clientes</h4>
@@ -117,8 +123,8 @@ export function EditaCliente() {
                                 type="password" 
                                 name="pass" 
                                 id="pass" 
-                                value={contrasena} 
-                                onChange={(e) => setContrasena(e.target.value)} 
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
